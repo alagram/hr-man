@@ -16,9 +16,9 @@
     .col-sm-6
       = f.text_field :dob, class: 'form-control', placeholder: 'Date of Birth'
   .form-group
-    = f.label :gender, class: 'col-sm-2 control-label'
+    = f.label :gender_id, class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.select :gender, options_for_select(@genders.map { |g| [g[0].humanize, g[0]] }, selected: @employee.gender), {}, class: 'form-control', placeholder: 'Gender'
+      = f.select :gender_id, Gender.all.map {|gender| [gender.sex, gender.id]}, {prompt: 'Select Gender'}, class: 'form-control'
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit (@employee.new_record? ? "Add Employee" : "Update Employee"), class: 'btn btn-default'
