@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_employees, only: [:show, :edit]
 
   def new
@@ -6,7 +7,7 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    @employees = Employee.all
+    @employees = Employee.order(sort_column + " " + sort_direction)
   end
 
   def create
@@ -39,5 +40,13 @@ class EmployeesController < ApplicationController
 
   def set_employees
     @employee = Employee.find(params[:id])
+  end
+
+  def sort_column
+    Employee.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

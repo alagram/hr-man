@@ -1,11 +1,11 @@
 %h3 Employees
 %table.table.table-bordered.table-striped
   %tr
-    %th First Name
-    %th Last Name
-    %th Other Names
-    %th Date of Birth
-    %th Gender
+    %th= sortable "first_name"
+    %th= sortable "last_name"
+    %th= sortable "other_names"
+    %th= sortable "dob", "Date of Birth"
+    %th= sortable "gender_id", "Gender"
     %td
   - @employees.each do |employee|
     %tr
@@ -15,3 +15,5 @@
       %td= employee.dob
       %td= employee.gender.sex
       %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
+
+= link_to "New Employee", new_employee_path, class: 'btn btn-primary'
