@@ -1,0 +1,24 @@
+= form_for @employee, html: { class: 'form-horizontal' } do |f|
+  .form-group
+    = f.label :first_name, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
+  .form-group
+    = f.label :last_name, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
+  .form-group
+    = f.label :other_names, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :other_names, class: 'form-control', placeholder: 'Other Names'
+  .form-group
+    = f.label :dob, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :dob, class: 'form-control', placeholder: 'Date of Birth'
+  .form-group
+    = f.label :gender, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :gender, options_for_select(@genders.map { |g| [g[0].humanize, g[0]] }, selected: @employee.gender), {}, class: 'form-control', placeholder: 'Gender'
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit (@employee.new_record? ? "Add Employee" : "Update Employee"), class: 'btn btn-default'

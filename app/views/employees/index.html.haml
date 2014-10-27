@@ -1,0 +1,17 @@
+%h3 Employees
+%table.table.table-bordered.table-striped
+  %tr
+    %th First Name
+    %th Last Name
+    %th Other Names
+    %th Date of Birth
+    %th Gender
+    %td
+  - @employees.each do |employee|
+    %tr
+      %td= employee.first_name
+      %td= employee.last_name
+      %td= employee.other_names
+      %td= employee.dob
+      %td= employee.gender.humanize
+      %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
