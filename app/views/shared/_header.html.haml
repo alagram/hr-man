@@ -1,0 +1,27 @@
+.container
+  %nav.navbar.navbar-default{:role => "navigation"}
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle.collapsed{"data-toggle" => "collapse", :type => "button"}
+        = link_to "HR Manager", employees_path, class: 'navbar-brand'
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => "#"} Link
+          %li
+            %a{:href => "#"} Link
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{:href => "#"} Link
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Dropdown
+              %span.caret
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                %a{:href => "#"} Action
+              %li
+                %a{:href => "#"} Another Action
+              %li.divider
+              %li
+                %a{:href => "#"} Separated Action
