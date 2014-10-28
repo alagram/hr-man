@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   helper_method :sort_column, :sort_direction
-  before_action :set_employees, only: [:show, :edit]
+  before_action :set_employees, only: [:show, :edit, :update]
 
   def new
     @employee = Employee.new
