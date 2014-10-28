@@ -1,0 +1,24 @@
+= form_for @employee, html: { class: 'form-horizontal', autocomplete: 'off' } do |f|
+  .form-group
+    = f.label :first_name, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
+  .form-group
+    = f.label :last_name, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
+  .form-group
+    = f.label :other_names, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :other_names, class: 'form-control', placeholder: 'Other Names'
+  .form-group
+    = f.label :dob, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :dob, class: 'form-control', placeholder: 'Date of Birth', id: 'dob-datepicker'
+  .form-group
+    = f.label :gender_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :gender_id, Gender.all.map {|gender| [gender.sex, gender.id]}, {prompt: 'Select Gender'}, class: 'form-control'
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit (@employee.new_record? ? "Add Employee" : "Update Employee"), class: 'btn btn-default'
