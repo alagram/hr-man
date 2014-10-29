@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029143531) do
+ActiveRecord::Schema.define(version: 20141029144627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,26 @@ ActiveRecord::Schema.define(version: 20141029143531) do
     t.integer  "company_id"
     t.float    "dayspermonth"
     t.integer  "emptype"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
+  end
+
+  create_table "tracings", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.string   "action"
+    t.integer  "record_id"
+    t.datetime "event_date"
+  end
+
+  create_table "user_groups", force: true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.string   "role"
     t.datetime "dateadded"
     t.datetime "dateupdated"
     t.integer  "user_id"
