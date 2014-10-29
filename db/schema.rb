@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029141728) do
+ActiveRecord::Schema.define(version: 20141029143158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 20141029141728) do
     t.datetime "datebooked"
     t.datetime "dateapproved"
     t.boolean  "status"
+    t.boolean  "isactive"
+  end
+
+  create_table "leave_types", force: true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.float    "dayspermonth"
+    t.integer  "emptype"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
     t.boolean  "isactive"
   end
 
