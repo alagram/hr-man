@@ -4,8 +4,8 @@
 
 Employee.delete_all
 Gender.delete_all
-male = Gender.create!(sex: "Male")
-female = Gender.create!(sex: "Female")
+male = Gender.create!(name: "Male")
+female = Gender.create!(name: "Female")
 
 50.times do
   Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id)
