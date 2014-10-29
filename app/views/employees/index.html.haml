@@ -17,3 +17,7 @@
       %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
 
 = link_to "New Employee", new_employee_path, class: 'btn btn-primary'
+
+%hr
+
+= will_paginate @employees, class: 'digg_pagination'

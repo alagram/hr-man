@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    @employees = Employee.order(sort_column + " " + sort_direction)
+    @employees = Employee.order(sort_column + " " + sort_direction).page(params[:page]).per_page(5)
   end
 
   def create

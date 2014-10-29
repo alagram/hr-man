@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'autoprefixer-rails'
 gem 'jquery-ui-rails'
+gem 'will_paginate', '~> 3.0'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do
