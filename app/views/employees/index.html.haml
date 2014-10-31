@@ -1,5 +1,8 @@
-%h3 Employees
 
+
+= link_to "New Employee", new_employee_path, class: 'btn btn-primary'
+
+%hr
 
 = form_tag search_employees_path, method: :get, role: "search" do
   .input-group
