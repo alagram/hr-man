@@ -31,6 +31,10 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def search
+    @results = Employee.search(params[:q])
+  end
+
 
   private
 
