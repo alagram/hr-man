@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141029144627) do
+ActiveRecord::Schema.define(version: 20141031061753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,48 @@ ActiveRecord::Schema.define(version: 20141029144627) do
     t.string   "configure"
     t.string   "value"
     t.string   "datatype"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
+  end
+
+  create_table "currencies", force: true do |t|
+    t.string   "name",        limit: 35
+    t.string   "symbol",      limit: 5
+    t.string   "code",        limit: 5
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
+  end
+
+  create_table "departments", force: true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.integer  "manager_id"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
+  end
+
+  create_table "emergencies", force: true do |t|
+    t.integer  "emp_id"
+    t.string   "title"
+    t.string   "first_name"
+    t.string   "other_names"
+    t.string   "last_name"
+    t.string   "telephone"
+    t.string   "mobile"
+    t.string   "address1"
+    t.string   "address2"
+    t.integer  "city"
+    t.integer  "state"
+    t.string   "postcode"
     t.datetime "dateadded"
     t.datetime "dateupdated"
     t.integer  "user_id"
@@ -44,6 +86,45 @@ ActiveRecord::Schema.define(version: 20141029144627) do
     t.datetime "updated_at"
     t.boolean  "isactive"
     t.integer  "company_id"
+  end
+
+  create_table "job_titles", force: true do |t|
+    t.integer  "emp_id"
+    t.integer  "company_id"
+    t.string   "name"
+    t.text     "desc"
+    t.text     "responsibilities"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
+  end
+
+  create_table "job_vacancies", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "job_title_id"
+    t.integer  "division_id"
+    t.integer  "department_id"
+    t.integer  "location_id"
+    t.integer  "currency_id"
+    t.float    "salary"
+    t.integer  "grade"
+    t.float    "hours"
+    t.integer  "contract_type"
+    t.string   "reporting_to"
+    t.text     "addtional_info"
+    t.text     "company_profile"
+    t.text     "job_summary"
+    t.text     "responsibilities"
+    t.text     "selection_criteria"
+    t.text     "desirable"
+    t.text     "how_to_apply"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
   end
 
   create_table "leave_requests", force: true do |t|
@@ -70,6 +151,47 @@ ActiveRecord::Schema.define(version: 20141029144627) do
     t.integer  "company_id"
     t.float    "dayspermonth"
     t.integer  "emptype"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
+  end
+
+  create_table "next_of_kins", force: true do |t|
+    t.integer  "emp_id"
+    t.string   "title"
+    t.string   "first_name"
+    t.string   "other_names"
+    t.string   "last_name"
+    t.string   "telephone"
+    t.string   "mobile"
+    t.string   "address1"
+    t.string   "address2"
+    t.integer  "city"
+    t.integer  "state"
+    t.string   "postcode"
+    t.integer  "relationship"
+    t.float    "percentage"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.string   "user_ip"
+    t.boolean  "isactive"
+  end
+
+  create_table "salary_bands", force: true do |t|
+    t.decimal "min_salary",  precision: 10, scale: 4
+    t.decimal "max_salary",  precision: 10, scale: 0
+    t.string  "band_name"
+    t.string  "band_symbol"
+  end
+
+  create_table "teams", force: true do |t|
+    t.integer  "company_id"
+    t.integer  "dept_id"
+    t.string   "name"
+    t.integer  "manager_id"
     t.datetime "dateadded"
     t.datetime "dateupdated"
     t.integer  "user_id"
