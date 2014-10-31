@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141031061753) do
+ActiveRecord::Schema.define(version: 20141031120134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,9 +75,40 @@ ActiveRecord::Schema.define(version: 20141031061753) do
     t.string   "last_name"
     t.string   "other_names"
     t.string   "dob"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "gender_id"
+    t.string   "emp_id"
+    t.integer  "dept_id"
+    t.integer  "job_id"
+    t.integer  "type_id"
+    t.string   "ssn"
+    t.string   "race"
+    t.integer  "marital"
+    t.string   "nationality"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city_id"
+    t.integer  "state"
+    t.integer  "zipcode"
+    t.integer  "country_id"
+    t.string   "email"
+    t.string   "webpage"
+    t.string   "homephone"
+    t.string   "officephone"
+    t.string   "cellphone"
+    t.float    "regularhours"
+    t.string   "username"
+    t.string   "password_digest"
+    t.integer  "usergroup_id"
+    t.integer  "numlogins"
+    t.datetime "dateadded"
+    t.datetime "dateupdated"
+    t.integer  "user_id"
+    t.integer  "user_ip"
+    t.integer  "manager_id"
+    t.integer  "delegated_id"
+    t.boolean  "isactive"
+    t.integer  "salaryband_id"
+    t.float    "basesalary"
   end
 
   create_table "genders", force: true do |t|
