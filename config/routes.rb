@@ -5,4 +5,6 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  resources :search_suggestions, only: :index
 end
