@@ -1,6 +1,7 @@
 class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :dob, :gender_id
   belongs_to :gender
+  has_secure_password validations: false
 
   def self.search(search_term)
     if search_term.include?(",")

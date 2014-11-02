@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101183846) do
+ActiveRecord::Schema.define(version: 20141102162731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cities", force: true do |t|
+    t.string  "name"
+    t.boolean "isactive"
+  end
 
   create_table "configurations", force: true do |t|
     t.integer  "company_id"
@@ -26,6 +31,11 @@ ActiveRecord::Schema.define(version: 20141101183846) do
     t.integer  "user_id"
     t.string   "user_ip"
     t.boolean  "isactive"
+  end
+
+  create_table "countries", force: true do |t|
+    t.string  "name"
+    t.boolean "isactive"
   end
 
   create_table "currencies", force: true do |t|
@@ -83,11 +93,10 @@ ActiveRecord::Schema.define(version: 20141101183846) do
     t.string   "ssn"
     t.string   "race"
     t.integer  "marital"
-    t.string   "nationality"
     t.string   "address1"
     t.string   "address2"
     t.string   "city_id"
-    t.integer  "state"
+    t.integer  "state_id"
     t.integer  "zipcode"
     t.integer  "country_id"
     t.string   "email"
@@ -109,6 +118,7 @@ ActiveRecord::Schema.define(version: 20141101183846) do
     t.boolean  "isactive"
     t.integer  "salaryband_id"
     t.float    "basesalary"
+    t.integer  "nationality_id"
   end
 
   create_table "genders", force: true do |t|
@@ -189,6 +199,11 @@ ActiveRecord::Schema.define(version: 20141101183846) do
     t.boolean  "isactive"
   end
 
+  create_table "nationalities", force: true do |t|
+    t.string  "name"
+    t.boolean "isactive"
+  end
+
   create_table "next_of_kins", force: true do |t|
     t.integer  "emp_id"
     t.string   "title"
@@ -218,6 +233,11 @@ ActiveRecord::Schema.define(version: 20141101183846) do
     t.string  "band_symbol"
   end
 
+  create_table "states", force: true do |t|
+    t.string  "name"
+    t.boolean "isactive"
+  end
+
   create_table "teams", force: true do |t|
     t.integer  "company_id"
     t.integer  "dept_id"
@@ -237,6 +257,11 @@ ActiveRecord::Schema.define(version: 20141101183846) do
     t.string   "action"
     t.integer  "record_id"
     t.datetime "event_date"
+  end
+
+  create_table "types", force: true do |t|
+    t.string  "name"
+    t.boolean "isactive"
   end
 
   create_table "user_groups", force: true do |t|

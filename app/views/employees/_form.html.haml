@@ -1,3 +1,4 @@
+%section.row
 = form_for @employee, html: { class: 'form-horizontal', autocomplete: 'off' } do |f|
   .form-group
     = f.label :first_name, class: 'col-sm-2 control-label'
@@ -19,6 +20,102 @@
     = f.label :gender_id, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.select :gender_id, Gender.all.map {|gender| [gender.name, gender.id]}, {prompt: 'Select Gender'}, class: 'form-control'
+  .form-group
+    = f.label :username, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :username, class: 'form-control', placeholder: 'Username'
+  .form-group
+    = f.label :password, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :password, class: 'form-control', placeholder: 'Password'
+  .form-group
+    = f.label :dept_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :dept_id, Department.all.map {|dept| [dept.name, dept.id]}, {prompt: 'Select Department'}, class: 'form-control'
+  .form-group
+    = f.label :job_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :job_id, class: 'form-control'
+  .form-group
+    = f.label :type_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :type_id, class: 'form-control'
+  .form-group
+    = f.label :ssn, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :ssn, class: 'form-control', placeholder: 'SSN'
+  .form-group
+    = f.label :race, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :race, class: 'form-control', placeholder: 'Race'
+  .form-group
+    = f.label :marital, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :marital, class: 'form-control', placeholder: 'Marital'
+  .form-group
+    = f.label :nationality_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :nationality_id, Nationality.all.map {|nation| [nation.name, nation.id]}, {prompt: 'Select Nationality'}, class: 'form-control'
+  .form-group
+    = f.label :address1, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :address1, class: 'form-control', placeholder: 'Address1'
+  .form-group
+    = f.label :address2, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :address2, class: 'form-control', placeholder: 'Address2'
+  .form-group
+    = f.label :city_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :city_id, City.all.map {|city| [city.name, city.id]}, {prompt: 'Select City'}, class: 'form-control'
+  .form-group
+    = f.label :state_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :state_id, State.all.map {|state| [state.name, state.id]}, {prompt: 'Select State'}, class: 'form-control'
+  .form-group
+    = f.label :zipcode, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :zipcode, class: 'form-control', placeholder: 'Zip Code'
+  .form-group
+    = f.label :country_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :country_id, Country.all.map {|country| [country.name, country.id]}, {prompt: 'Select Country'}, class: 'form-control'
+  .form-group
+    = f.label :email, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.email_field :email, class: 'form-control', placeholder: 'Email'
+  .form-group
+    = f.label :webpage, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :webpage, class: 'form-control', placeholder: 'Webpage'
+  .form-group
+    = f.label :homephone, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :homephone, class: 'form-control', placeholder: 'Homephone'
+  .form-group
+    = f.label :officephone, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :officephone, class: 'form-control', placeholder: 'Officephone'
+  .form-group
+    = f.label :cellphone, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :cellphone, class: 'form-control', placeholder: 'Cellphone'
+  .form-group
+    = f.label :regularhours, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :regularhours, class: 'form-control', placeholder: 'Regular Hours'
+  .form-group
+    = f.label :numlogins, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :numlogins, class: 'form-control', placeholder: 'Numlogins'
+  .form-group
+    = f.label :manager_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :manager_id, class: 'form-control', placeholder: 'Manager'
+  .form-group
+    = f.label :basesalary, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :basesalary, class: 'form-control', placeholder: 'Base Salary'
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit (@employee.new_record? ? "Add Employee" : "Update Employee"), class: 'btn btn-default'
