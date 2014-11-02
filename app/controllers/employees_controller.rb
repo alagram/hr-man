@@ -32,8 +32,6 @@ class EmployeesController < ApplicationController
   end
 
   def search
-    binding.pry
-    @employee = Employee.find(params[:q])
     @results = Employee.search(params[:q])
   end
 
