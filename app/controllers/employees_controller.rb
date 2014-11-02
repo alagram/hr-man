@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
   end
 
   def index
-    @employees = Employee.order(sort_column + " " + sort_direction).includes(:gender).page(params[:page]).per_page(30)
+    @employees = Employee.includes(:gender)
   end
 
   def create
@@ -32,7 +32,13 @@ class EmployeesController < ApplicationController
   end
 
   def search
+    binding.pry
+    @employee = Employee.find(params[:q])
     @results = Employee.search(params[:q])
+  end
+
+  def search_suggestions
+    render json: Employee.terms_for(params[:term])
   end
 
 

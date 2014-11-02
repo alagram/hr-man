@@ -1,0 +1,5 @@
+= form_tag search_employees_path, method: :get, role: "search" do
+  .input-group
+    = text_field_tag :q, nil, class: 'form-control', placeholder: 'Search here...', id: 'employee_search_form'
+    %span.input-group-btn
+      = submit_tag 'Search!', class: 'btn btn-default', name: nil
