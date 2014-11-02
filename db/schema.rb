@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101114816) do
+ActiveRecord::Schema.define(version: 20141101183846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,11 +216,6 @@ ActiveRecord::Schema.define(version: 20141101114816) do
     t.decimal "max_salary",  precision: 10, scale: 0
     t.string  "band_name"
     t.string  "band_symbol"
-  end
-
-  create_table "search_suggestions", force: true do |t|
-    t.string  "term"
-    t.integer "popularity"
   end
 
   create_table "teams", force: true do |t|
