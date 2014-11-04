@@ -45,9 +45,9 @@
     .col-sm-6
       = f.text_field :ssn, class: 'form-control', placeholder: 'SSN'
   .form-group
-    = f.label :race, class: 'col-sm-2 control-label'
+    = f.label :race_id, class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.text_field :race, class: 'form-control', placeholder: 'Race'
+      = f.select :dept_id, Race.all.map {|race| [race.name, race.id]}, {prompt: 'Select Race'}, class: 'form-control'
   .form-group
     = f.label :marital, class: 'col-sm-2 control-label'
     .col-sm-6

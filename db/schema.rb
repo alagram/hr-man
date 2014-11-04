@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104165718) do
+ActiveRecord::Schema.define(version: 20141104171701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,7 +91,6 @@ ActiveRecord::Schema.define(version: 20141104165718) do
     t.integer  "job_id"
     t.integer  "type_id"
     t.string   "ssn"
-    t.string   "race"
     t.integer  "marital"
     t.string   "address1"
     t.string   "address2"
@@ -120,6 +119,7 @@ ActiveRecord::Schema.define(version: 20141104165718) do
     t.float    "basesalary"
     t.integer  "nationality_id"
     t.datetime "start_date"
+    t.integer  "race_id"
   end
 
   create_table "genders", force: true do |t|
@@ -225,6 +225,11 @@ ActiveRecord::Schema.define(version: 20141104165718) do
     t.integer  "user_id"
     t.string   "user_ip"
     t.boolean  "isactive"
+  end
+
+  create_table "races", force: true do |t|
+    t.string  "name"
+    t.boolean "isactive"
   end
 
   create_table "salary_bands", force: true do |t|
