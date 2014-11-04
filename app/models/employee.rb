@@ -2,17 +2,18 @@ class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :dob, :gender_id
   belongs_to :gender
   has_secure_password validations: false
+  has_many :emergencies, foreign_key: 'emp_id', primary_key: 'emp_id'
 
   def self.search(search_term)
     if search_term.include?(",")
-      param = search_term.split(", ")
-      where("emp_id IN (?)", param)
+      param = search_term.split(",").map(&:strip).map(&:downcase)
+      where("lower(emp_id) IN (?)", param)
     else
-      where(["first_name = ? or last_name = ? or other_names = ?", search_term, search_term, search_term])
+      find_by_sql("SELECT * from employees WHERE concat(first_name, other_names, last_name) = '#{search_term.split.join}'")
     end
   end
 
-  def full_name
+  def to_s
     if other_names.present?
       "#{last_name}, #{other_names} #{first_name}"
     else
@@ -21,7 +22,7 @@ class Employee < ActiveRecord::Base
   end
 
   def self.terms_for(prefix)
-    suggestions = where("first_name like :search or last_name like :search or other_names like :search or emp_id like :search", search: "%#{prefix}%")
+    suggestions = where("lower(first_name) like :search or lower(last_name) like :search or lower(other_names) like :search or lower(emp_id) like :search", search: "%#{prefix.downcase}%")
     suggestions.limit(10).pluck(:first_name, :other_names, :last_name).map{|val| val.compact.join(" ")}
   end
 end
