@@ -12,7 +12,7 @@
     %td
   - @results.each do |employee|
     %tr
-      %td= employee.full_name
+      %td= link_to employee, employee_path(employee)
       %td= employee.dob
       %td= employee.gender.name
       %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
