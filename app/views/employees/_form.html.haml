@@ -57,13 +57,13 @@
     .col-sm-6
       = f.select :nationality_id, Nationality.all.map {|nation| [nation.name, nation.id]}, {prompt: 'Select Nationality'}, class: 'form-control'
   .form-group
-    = f.label :address1, class: 'col-sm-2 control-label'
+    = f.label :address1, "Address Line 1", class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.text_field :address1, class: 'form-control', placeholder: 'Address1'
+      = f.text_field :address1, class: 'form-control', placeholder: 'Address Line 1'
   .form-group
-    = f.label :address2, class: 'col-sm-2 control-label'
+    = f.label :address2, "Address Line 2", class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.text_field :address2, class: 'form-control', placeholder: 'Address2'
+      = f.text_field :address2, class: 'form-control', placeholder: 'Address Line 2'
   .form-group
     = f.label :city_id, class: 'col-sm-2 control-label'
     .col-sm-6
@@ -73,7 +73,7 @@
     .col-sm-6
       = f.select :state_id, State.all.map {|state| [state.name, state.id]}, {prompt: 'Select State'}, class: 'form-control'
   .form-group
-    = f.label :zipcode, class: 'col-sm-2 control-label'
+    = f.label :zipcode, "Zipcode / Post code", class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :zipcode, class: 'form-control', placeholder: 'Zip Code'
   .form-group
@@ -105,10 +105,6 @@
     .col-sm-6
       = f.text_field :regularhours, class: 'form-control', placeholder: 'Regular Hours'
   .form-group
-    = f.label :numlogins, class: 'col-sm-2 control-label'
-    .col-sm-6
-      = f.text_field :numlogins, class: 'form-control', placeholder: 'Numlogins'
-  .form-group
     = f.label :manager_id, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :manager_id, class: 'form-control', placeholder: 'Manager'
@@ -116,6 +112,10 @@
     = f.label :basesalary, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :basesalary, class: 'form-control', placeholder: 'Base Salary'
+  .form-group
+    = f.label :start_date, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :start_date, class: 'form-control', placeholder: 'Start Date'
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit (@employee.new_record? ? "Add Employee" : "Update Employee"), class: 'btn btn-default'
