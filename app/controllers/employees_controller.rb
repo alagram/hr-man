@@ -22,6 +22,10 @@ class EmployeesController < ApplicationController
 
   def edit;end
 
+  def show
+
+  end
+
   def update
     if @employee.update(employee_params)
       redirect_to employees_path
@@ -32,7 +36,7 @@ class EmployeesController < ApplicationController
   end
 
   def search
-    @results = Employee.search(params[:q])
+    @results = Employee.includes(:gender).search(params[:q])
   end
 
   def search_suggestions
@@ -48,13 +52,5 @@ class EmployeesController < ApplicationController
 
   def set_employees
     @employee = Employee.find(params[:id])
-  end
-
-  def sort_column
-    Employee.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

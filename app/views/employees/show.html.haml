@@ -1,0 +1,58 @@
+
+%div.row
+  %div.col-md-8
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %th= "Full Name"
+          %th= "Date of Birth"
+          %th= "Gender"
+      %tbody
+        %tr
+          %td= @employee
+          %td= @employee.dob
+          %td= @employee.gender.name
+  %div.col-md-4
+    .form-group.text-center.col-md-4.col-md-offset-2
+      = link_to employees_path, class: 'btn btn-primary btn-lg' do
+        \&#8592; Back
+
+%br
+
+%div.row
+  %div.col.md-12
+    %ul.nav.nav-tabs
+      %li{:class => ('active' if params[:tab].nil?)}
+        =link_to "Next of Kin", employee_path(@employee)
+      %li{:class => ('active' if params[:tab] == 'emergency')}
+        =link_to "Emergency Contact", employee_path(@employee, tab: 'emergency')
+      %li{:class => ('active' if params[:tab] == 'address')}
+        =link_to "Address", employee_path(@employee, tab: 'address')
+      %li{:class => ('active' if params[:tab] == 'leavedetails')}
+        =link_to "Leave Details", employee_path(@employee, tab: 'leavedetails')
+
+- if params[:tab] == 'address'
+  %br
+  %table.table.table-hover
+    %thead
+      %tr
+        %th= "Address 1"
+        %th= "Address 2"
+    %tbody
+      %tr
+        %td= @employee.address1
+        %td= @employee.address2
+- elsif params[:tab] == 'emergency'
+  %br
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+        %th= "Emergency Contact Name"
+        %th= "Emergency Contact Address"
+    %tbody
+      - @employee.emergencies.each do |contact|
+        %tr
+          %td
+          %td= contact
+          %td= contact.address1
