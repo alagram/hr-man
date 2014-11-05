@@ -3,6 +3,7 @@ class Employee < ActiveRecord::Base
   belongs_to :gender
   has_secure_password validations: false
   has_many :emergencies, foreign_key: 'emp_id', primary_key: 'emp_id'
+  has_one :next_of_kin, foreign_key: 'emp_id', primary_key: 'emp_id'
 
   def self.search(search_term)
     if search_term.include?(",")

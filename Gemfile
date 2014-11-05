@@ -29,6 +29,8 @@ gem 'jquery-ui-rails'
 gem 'will_paginate', '~> 3.0'
 gem 'rack-mini-profiler'
 gem 'jquery-datatables-rails', '~> 2.2.3'
+gem 'bootstrap_form'
+gem 'nested_form'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104171701) do
+ActiveRecord::Schema.define(version: 20141105102533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,7 +206,6 @@ ActiveRecord::Schema.define(version: 20141104171701) do
   end
 
   create_table "next_of_kins", force: true do |t|
-    t.integer  "emp_id"
     t.string   "title"
     t.string   "first_name"
     t.string   "other_names"
@@ -216,15 +215,16 @@ ActiveRecord::Schema.define(version: 20141104171701) do
     t.string   "address1"
     t.string   "address2"
     t.integer  "city"
-    t.integer  "state"
     t.string   "postcode"
     t.integer  "relationship"
     t.float    "percentage"
-    t.datetime "dateadded"
-    t.datetime "dateupdated"
     t.integer  "user_id"
     t.string   "user_ip"
     t.boolean  "isactive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "emp_id"
+    t.integer  "state_id"
   end
 
   create_table "races", force: true do |t|

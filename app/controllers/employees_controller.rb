@@ -23,7 +23,7 @@ class EmployeesController < ApplicationController
   def edit;end
 
   def show
-
+    @next_of_kin = NextOfKin.new
   end
 
   def update

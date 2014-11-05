@@ -31,7 +31,23 @@
       %li{:class => ('active' if params[:tab] == 'leavedetails')}
         =link_to "Leave Details", employee_path(@employee, tab: 'leavedetails')
 
-- if params[:tab] == 'address'
+- if params[:tab].nil?
+  %br
+  %table.table.table-hover
+    %thead
+      %tr
+        %th= "Name"
+        %th= "Mobile"
+        %th
+    %tbody
+      %tr
+        %td= @employee.next_of_kin
+        %td= @employee.next_of_kin.mobile
+        %td
+
+  %br
+  = render 'next_of_kins/new', employee: @employee
+- elsif params[:tab] == 'address'
   %br
   %table.table.table-hover
     %thead

@@ -7,6 +7,7 @@ RSpec.describe Employee, :type => :model do
  it { should validate_presence_of(:dob) }
  it { should validate_presence_of(:gender_id) }
  it { should have_many(:emergencies).with_foreign_key('emp_id') }
+ it { should have_one(:next_of_kin).with_foreign_key('emp_id') }
 
  describe "search" do
   it "returns an array if one record is found" do

@@ -5,5 +5,6 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
+    resources :next_of_kins, only: :create
   end
 end
