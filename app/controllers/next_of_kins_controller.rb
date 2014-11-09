@@ -11,7 +11,6 @@ class NextOfKinsController < ApplicationController
   def create
     @next_of_kin = NextOfKin.new(next_of_kin_params)
     @next_of_kin.employee_id = @employee.id
-    current_percentage = @employee.next_of_kins.sum(:percentage)
 
     if next_of_kin_params["percentage"].to_f + current_percentage > 100
       redirect_to new_employee_next_of_kin_path
@@ -57,10 +56,13 @@ class NextOfKinsController < ApplicationController
   end
 
   def check_percentage_value
-    current_percentage = @employee.next_of_kins.sum(:percentage)
     if params[:percentage].to_f + current_percentage > 100
       redirect_to new_employee_next_of_kin_path
       flash[:danger] = "Please reduce percentage value."
     end
+  end
+
+  def current_percentage
+    @employee.next_of_kins.sum(:percentage)
   end
 end
