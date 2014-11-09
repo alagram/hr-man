@@ -55,7 +55,7 @@
   .form-group
     = f.label :race_id, class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.select :dept_id, Race.all.map {|race| [race.name, race.id]}, {prompt: 'Select Race'}, class: 'form-control'
+      = f.select :race_id, Race.all.map {|race| [race.name, race.id]}, {prompt: 'Select Race'}, class: 'form-control'
   .form-group
     = f.label :marital, class: 'col-sm-2 control-label'
     .col-sm-6
