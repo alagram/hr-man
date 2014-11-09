@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109140420) do
+ActiveRecord::Schema.define(version: 20141109140740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,11 @@ ActiveRecord::Schema.define(version: 20141109140420) do
     t.integer  "user_id"
     t.string   "user_ip"
     t.boolean  "isactive"
+  end
+
+  create_table "maritals", force: true do |t|
+    t.string  "name"
+    t.boolean "isactive"
   end
 
   create_table "nationalities", force: true do |t|

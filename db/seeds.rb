@@ -40,6 +40,10 @@ Type.create(name: "Contractor", isactive: true)
 Type.create(name: "Permanent", isactive: true)
 Type.create(name: "Casual", isactive: true)
 
+Marital.create(name: "Single", isactive: true)
+Marital.create(name: "Married", isactive: true)
+Marital.create(name: "Divorced", isactive: true)
+
 line_manager = UserGroup.create(name: "Line Manager", isactive: true)
 team_lead = UserGroup.create(name: "Team Lead", isactive: true)
 direct_report = UserGroup.create(name: "Direct Report", isactive: true)
