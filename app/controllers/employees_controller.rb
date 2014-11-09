@@ -11,6 +11,7 @@ class EmployeesController < ApplicationController
   end
 
   def create
+    binding.pry
     @employee = Employee.new(employee_params)
     if @employee.save
       redirect_to employees_path
@@ -22,9 +23,7 @@ class EmployeesController < ApplicationController
 
   def edit;end
 
-  def show
-    @next_of_kin = NextOfKin.new
-  end
+  def show; end
 
   def update
     if @employee.update(employee_params)
@@ -43,11 +42,18 @@ class EmployeesController < ApplicationController
     render json: Employee.terms_for(params[:term])
   end
 
+  def employee_managers
+    query = Employee.where("user_group_id in (1, 2) and lower(first_name) like :param or
+                          lower(last_name) like :param", param: "%#{params[:term].downcase}%")
+    @managers = query.limit(10).pluck(:first_name, :last_name).map{ |name| name.join(" ") }
+    render json: @managers
+  end
+
 
   private
 
   def employee_params
-    params.require(:employee).permit(:first_name, :last_name, :other_names, :dob, :gender_id)
+    params.require(:employee).permit(:first_name, :last_name, :other_names, :dob, :gender_id, :manager_name)
   end
 
   def set_employees

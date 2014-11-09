@@ -13,6 +13,10 @@
     .col-sm-6
       = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
   .form-group
+    = f.label :emp_id, "Staff Number", class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.text_field :emp_id, class: 'form-control', placeholder: 'Staff Number'
+  .form-group
     = f.label :dob, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :dob, class: 'form-control', placeholder: 'Date of Birth', id: 'dob-datepicker'
@@ -21,27 +25,31 @@
     .col-sm-6
       = f.select :gender_id, Gender.all.map {|gender| [gender.name, gender.id]}, {prompt: 'Select Gender'}, class: 'form-control'
   .form-group
+    = f.label :user_group_id, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.select :user_group_id, UserGroup.all.map {|user_group| [user_group.name, user_group.id]}, {prompt: 'Select Usergroup'}, class: 'form-control'
+  .form-group
     = f.label :username, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :username, class: 'form-control', placeholder: 'Username'
   .form-group
     = f.label :password, class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.text_field :password, class: 'form-control', placeholder: 'Password'
+      = f.password_field :password, class: 'form-control', placeholder: 'Password'
   .form-group
     = f.label :dept_id, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.select :dept_id, Department.all.map {|dept| [dept.name, dept.id]}, {prompt: 'Select Department'}, class: 'form-control'
   .form-group
-    = f.label :job_id, class: 'col-sm-2 control-label'
+    = f.label :job_title_id, class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.text_field :job_id, class: 'form-control'
+      = f.select :job_title_id, JobTitle.all.map {|job_title| [job_title.name, job_title.id]}, {prompt: 'Select Job Title'}, class: 'form-control'
   .form-group
     = f.label :type_id, class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.text_field :type_id, class: 'form-control'
+      = f.select :type_id, Type.all.map {|type| [type.name, type.id]}, {prompt: 'Select Type'}, class: 'form-control'
   .form-group
-    = f.label :ssn, class: 'col-sm-2 control-label'
+    = f.label :ssn, "Social Security Number", class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :ssn, class: 'form-control', placeholder: 'SSN'
   .form-group
@@ -105,9 +113,9 @@
     .col-sm-6
       = f.text_field :regularhours, class: 'form-control', placeholder: 'Regular Hours'
   .form-group
-    = f.label :manager_id, class: 'col-sm-2 control-label'
+    = f.label :manager_name, class: 'col-sm-2 control-label'
     .col-sm-6
-      = f.text_field :manager_id, class: 'form-control', placeholder: 'Manager'
+      = f.text_field :manager_name, class: 'form-control', placeholder: 'Manager', data: {autocomplete_source: employee_managers_path}, id: 'manager_field'
   .form-group
     = f.label :basesalary, class: 'col-sm-2 control-label'
     .col-sm-6

@@ -1,8 +1,8 @@
 .row
   .col-sm-5
-    %h3 Add Next of Kin
+    %h3= @next_of_kin.new_record? ? "Add Next of Kin" : "Update Next of Kin"
     %br
-    = bootstrap_nested_form_for [employee, @next_of_kin] do |f|
+    = bootstrap_nested_form_for [@employee, @next_of_kin] do |f|
       = f.text_field :title, placeholder: 'Title'
       = f.text_field :first_name, placeholder: 'First Name'
       = f.text_field :other_names, placeholder: 'Other Names'
@@ -11,8 +11,10 @@
       = f.text_field :mobile, placeholder: 'Mobile'
       = f.text_field :address1
       = f.text_field :address2
+      = f.select :city_id, City.all.map {|city| [city.name, city.id]}, {prompt: 'Select City'}, class: 'form-control'
       = f.select :state_id, State.all.map {|state| [state.name, state.id]}, {prompt: 'Select State'}, class: 'form-control'
       = f.text_field :postcode, placeholder: 'Postcode / Zipcode'
+      = f.text_field :relationship, placeholder: 'Relationship'
       = f.text_field :percentage, placeholder: 'Percentage'
       = f.form_group do
-        = f.submit "Add Next of Kin", class: "btn btn-primary"
+        = f.submit (@next_of_kin.new_record? ? "Add Next of Kin" : "Update Next of Kin"), class: 'btn btn-default'

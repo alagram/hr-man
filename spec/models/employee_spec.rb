@@ -6,8 +6,9 @@ RSpec.describe Employee, :type => :model do
  it { should validate_presence_of(:last_name) }
  it { should validate_presence_of(:dob) }
  it { should validate_presence_of(:gender_id) }
- it { should have_many(:emergencies).with_foreign_key('emp_id') }
- it { should have_one(:next_of_kin).with_foreign_key('emp_id') }
+ it { should have_many(:emergencies) }
+ it { should have_many(:next_of_kins) }
+ it { should belong_to(:user_group) }
 
  describe "search" do
   it "returns an array if one record is found" do

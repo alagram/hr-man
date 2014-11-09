@@ -38,15 +38,20 @@
       %tr
         %th= "Name"
         %th= "Mobile"
-        %th
+        %th= "Percentage"
+        %th= "Edit"
     %tbody
-      %tr
-        %td= @employee.next_of_kin
-        %td= @employee.next_of_kin.mobile
-        %td
+      - @employee.next_of_kins.each do |next_of_kin|
+        %tr
+          %td= next_of_kin
+          %td= next_of_kin.mobile
+          %td= next_of_kin.percentage
+          %td
+            = link_to edit_employee_next_of_kin_path(@employee, next_of_kin) do
+              %i.glyphicon.glyphicon-edit
 
   %br
-  = render 'next_of_kins/new', employee: @employee
+  = link_to "Add Next of Kin", new_employee_next_of_kin_path(@employee), class: "btn btn-success"
 - elsif params[:tab] == 'address'
   %br
   %table.table.table-hover

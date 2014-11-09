@@ -1,5 +1,5 @@
 class Emergency < ActiveRecord::Base
-  belongs_to :employee, foreign_key: 'emp_id', primary_key: 'emp_id'
+  belongs_to :employee
 
   def to_s
     if other_names.present?

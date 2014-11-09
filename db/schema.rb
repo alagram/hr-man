@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105123537) do
+ActiveRecord::Schema.define(version: 20141108233448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20141105123537) do
   end
 
   create_table "emergencies", force: true do |t|
-    t.string   "emp_id"
     t.string   "title"
     t.string   "first_name"
     t.string   "other_names"
@@ -78,6 +77,7 @@ ActiveRecord::Schema.define(version: 20141105123537) do
     t.integer  "user_id"
     t.string   "user_ip"
     t.boolean  "isactive"
+    t.integer  "employee_id"
   end
 
   create_table "employees", force: true do |t|
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20141105123537) do
     t.integer  "gender_id"
     t.string   "emp_id"
     t.integer  "dept_id"
-    t.integer  "job_id"
+    t.integer  "job_title_id"
     t.integer  "type_id"
     t.string   "ssn"
     t.integer  "marital"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20141105123537) do
     t.float    "regularhours"
     t.string   "username"
     t.string   "password_digest"
-    t.integer  "usergroup_id"
+    t.integer  "user_group_id"
     t.integer  "numlogins"
     t.datetime "dateadded"
     t.datetime "dateupdated"
@@ -223,8 +223,8 @@ ActiveRecord::Schema.define(version: 20141105123537) do
     t.boolean  "isactive"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "emp_id"
     t.integer  "state_id"
+    t.integer  "employee_id"
   end
 
   create_table "races", force: true do |t|

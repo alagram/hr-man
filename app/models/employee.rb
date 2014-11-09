@@ -2,8 +2,10 @@ class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :dob, :gender_id
   belongs_to :gender
   has_secure_password validations: false
-  has_many :emergencies, foreign_key: 'emp_id', primary_key: 'emp_id'
-  has_one :next_of_kin, foreign_key: 'emp_id', primary_key: 'emp_id'
+  has_many :emergencies
+  has_many :next_of_kins
+  belongs_to :manager, class_name: "Employee", foreign_key: "manager_id"
+  belongs_to :user_group
 
   def self.search(search_term)
     if search_term.include?(",")
@@ -25,5 +27,14 @@ class Employee < ActiveRecord::Base
   def self.terms_for(prefix)
     suggestions = where("lower(first_name) like :search or lower(last_name) like :search or lower(other_names) like :search or lower(emp_id) like :search", search: "%#{prefix.downcase}%")
     suggestions.limit(10).pluck(:first_name, :other_names, :last_name).map{|val| val.compact.join(" ")}
+  end
+
+  def manager_name
+    "#{manager.first_name} #{manager.last_name}" if manager.present?
+  end
+
+  def manager_name=(name)
+    names = name.split(" ")
+    self.manager = Employee.find_by_first_name_and_last_name(names.first, names.last) if name.present?
   end
 end
