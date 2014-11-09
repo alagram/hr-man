@@ -33,47 +33,58 @@
 
 - if params[:tab].nil?
   %br
-  %table.table.table-hover
-    %thead
-      %tr
-        %th= "Name"
-        %th= "Mobile"
-        %th= "Percentage"
-        %th= "Edit"
-    %tbody
-      - @employee.next_of_kins.each do |next_of_kin|
+  - if @employee.next_of_kins.empty?
+    %p.text-center= "No records available."
+  -else
+    %table.table.table-hover
+      %thead
         %tr
-          %td= next_of_kin
-          %td= next_of_kin.mobile
-          %td= next_of_kin.percentage
-          %td
-            = link_to edit_employee_next_of_kin_path(@employee, next_of_kin) do
-              %i.glyphicon.glyphicon-edit
+          %th= "Name"
+          %th= "Mobile"
+          %th= "Percentage"
+          %th= "Edit"
+      %tbody
+        - @employee.next_of_kins.each do |next_of_kin|
+          %tr
+            %td= next_of_kin
+            %td= next_of_kin.mobile
+            %td= next_of_kin.percentage
+            %td
+              = link_to edit_employee_next_of_kin_path(@employee, next_of_kin) do
+                %i.glyphicon.glyphicon-edit
 
   %br
   = link_to "Add Next of Kin", new_employee_next_of_kin_path(@employee), class: "btn btn-success"
 - elsif params[:tab] == 'address'
-  %br
-  %table.table.table-hover
-    %thead
-      %tr
-        %th= "Address 1"
-        %th= "Address 2"
-    %tbody
-      %tr
-        %td= @employee.address1
-        %td= @employee.address2
-- elsif params[:tab] == 'emergency'
-  %br
-  %table.table.table-hover
-    %thead
-      %tr
-        %th
-        %th= "Emergency Contact Name"
-        %th= "Emergency Contact Address"
-    %tbody
-      - @employee.emergencies.each do |contact|
+  - if @employee.address1.present? || @employee.address2.present?
+    %br
+    %table.table.table-hover
+      %thead
         %tr
-          %td
-          %td= contact
-          %td= contact.address1
+          %th= "Address 1"
+          %th= "Address 2"
+      %tbody
+        %tr
+          %td= @employee.address1
+          %td= @employee.address2
+  - else
+    %br
+    %p.text-center= "No records available."
+- elsif params[:tab] == 'emergency'
+  - if @employee.emergencies.present?
+    %br
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+          %th= "Emergency Contact Name"
+          %th= "Emergency Contact Address"
+      %tbody
+        - @employee.emergencies.each do |contact|
+          %tr
+            %td
+            %td= contact
+            %td= contact.address1
+  - else
+    %br
+    %p.text-center= "No records available."
