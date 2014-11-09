@@ -11,7 +11,6 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    binding.pry
     @employee = Employee.new(employee_params)
     if @employee.save
       redirect_to employees_path
@@ -43,9 +42,9 @@ class EmployeesController < ApplicationController
   end
 
   def employee_managers
-    query = Employee.where("user_group_id in (1, 2) and lower(first_name) like :param or
-                          lower(last_name) like :param", param: "%#{params[:term].downcase}%")
-    @managers = query.limit(10).pluck(:first_name, :last_name).map{ |name| name.join(" ") }
+    query = Employee.where("user_group_id in (1, 2) and (lower(first_name) like :param or
+                          lower(last_name) like :param)", param: "%#{params[:term].downcase}%").limit(10)
+    @managers = query.pluck(:first_name, :last_name).map{ |name| name.join(" ") }
     render json: @managers
   end
 
