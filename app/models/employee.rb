@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  validates_presence_of :first_name, :last_name, :dob, :gender_id
+  validates_presence_of :first_name, :last_name, :dob, :gender_id, :manager_id
   belongs_to :gender
   has_secure_password validations: false
   has_many :emergencies

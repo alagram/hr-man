@@ -9,6 +9,7 @@ RSpec.describe Employee, :type => :model do
  it { should have_many(:emergencies) }
  it { should have_many(:next_of_kins) }
  it { should belong_to(:user_group) }
+ it { should validate_presence_of(:manager_id) }
 
  describe "search" do
   it "returns an array if one record is found" do
