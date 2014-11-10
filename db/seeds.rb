@@ -48,10 +48,11 @@ line_manager = UserGroup.create(name: "Line Manager", isactive: true)
 team_lead = UserGroup.create(name: "Team Lead", isactive: true)
 direct_report = UserGroup.create(name: "Direct Report", isactive: true)
 
-manager_1 = Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: team_lead.id)
-manager_2 = Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: line_manager.id)
+manager_1 = Employee.create!(first_name: "Albert", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: team_lead.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}")
+manager_2 = Employee.create!(first_name: "Mawunyo", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: line_manager.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}")
+manager_2 = Employee.create!(first_name: "Esinam", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: line_manager.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}")
 
 30.times do
-  Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: direct_report.id, manager: manager_1)
-  Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, dob: Faker::Date.backward(14600).strftime("%Y-%m-%d"), gender_id: female.id, user_group_id: direct_report.id, manager: manager_2)
+  Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: direct_report.id, manager: manager_1, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}")
+  Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, dob: Faker::Date.backward(14600).strftime("%Y-%m-%d"), gender_id: female.id, user_group_id: direct_report.id, manager: manager_2, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}")
 end
