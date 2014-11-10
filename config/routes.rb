@@ -7,5 +7,6 @@ Rails.application.routes.draw do
       get :search
     end
     resources :next_of_kins, only: [:new, :create, :edit, :update]
+    resources :emergencies, only: [:new, :create, :edit, :update]
   end
 end

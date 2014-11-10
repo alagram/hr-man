@@ -64,11 +64,11 @@
       %thead
         %tr
           %th= "Address 1"
-          %th= "Address 2"
+          %th= "Address 2" if @employee.address2
       %tbody
         %tr
           %td= @employee.address1
-          %td= @employee.address2
+          %td= @employee.address2  if @employee.address2
   - else
     %br
     %p.text-center= "No records available."
@@ -79,14 +79,21 @@
       %thead
         %tr
           %th
-          %th= "Emergency Contact Name"
-          %th= "Emergency Contact Address"
+          %th= "Contact Name"
+          %th= "Contact Address"
+          %th= "Mobile"
+          %th= "Edit"
       %tbody
-        - @employee.emergencies.each do |contact|
+        - @employee.emergencies.each do |emergency|
           %tr
             %td
-            %td= contact
-            %td= contact.address1
+            %td= emergency
+            %td= emergency.address1
+            %td= emergency.mobile
+            %td
+              = link_to edit_employee_emergency_path(@employee, emergency) do
+                %i.glyphicon.glyphicon-edit
   - else
     %br
     %p.text-center= "No records available."
+  = link_to "Add Emergency Contact", new_employee_emergency_path(@employee), class: 'btn btn-success'

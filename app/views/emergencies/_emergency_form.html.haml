@@ -1,0 +1,14 @@
+= bootstrap_nested_form_for [@employee, @emergency] do |f|
+  = f.text_field :title, placeholder: 'Title'
+  = f.text_field :first_name, placeholder: 'First Name'
+  = f.text_field :other_names, placeholder: 'Other Names'
+  = f.text_field :last_name, placeholder: 'Last Name'
+  = f.text_field :telephone, placeholder: 'Telephone'
+  = f.text_field :mobile, placeholder: 'Mobile'
+  = f.text_field :address1
+  = f.text_field :address2
+  = f.select :city_id, City.all.map {|city| [city.name, city.id]}, {prompt: 'Select City'}, class: 'form-control'
+  = f.select :state_id, State.all.map {|state| [state.name, state.id]}, {prompt: 'Select State'}, class: 'form-control'
+  = f.text_field :postcode, placeholder: 'Postcode / Zipcode'
+  = f.form_group do
+    = f.submit class: 'btn btn-primary'
