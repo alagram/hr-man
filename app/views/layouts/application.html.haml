@@ -1,9 +1,11 @@
 !!!
 %html
   %head
-    %title HrMan
+    %title= title
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+    %meta{ name: 'keywords', content: meta_keywords }
+    %meta{ name: 'description', content: meta_description }
     = csrf_meta_tags
   %body
     = render 'shared/header'

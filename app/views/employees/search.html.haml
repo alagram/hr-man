@@ -1,3 +1,8 @@
+- if @results.present?
+  - title "Displaying results for #{@results.first.first_name} #{@results.first.last_name} ... "
+- else
+  - title "Nothing found"
+
 %hr
 
 = render "search_bar"

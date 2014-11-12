@@ -1,8 +1,9 @@
+- title "Details #{@employee.first_name} #{@employee.last_name}"
 
 %div.row
   .col-md-8
     .jumbotron
-      %table.table.table-condensed
+      %table.table.table-striped{:style => 'background: white'}
         %thead
           %tr
             %th= "Full Name"
