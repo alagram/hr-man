@@ -1,4 +1,5 @@
 class EmergenciesController < ApplicationController
+  before_action :require_user
   before_action :find_employee
   before_action :find_emergency, only: [:edit, :update]
 

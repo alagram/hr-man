@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  root to: 'employees#new'
+  root to: 'sessions#new'
   get 'search_suggestions', to: 'employees#search_suggestions'
   get 'employee_managers', to: 'employees#employee_managers'
+  get 'sign_in', to: 'sessions#new'
+  get 'sign_out', to: 'sessions#destroy'
   resources :employees, except: :destroy do
     collection do
       get :search
@@ -9,4 +11,5 @@ Rails.application.routes.draw do
     resources :next_of_kins, only: [:new, :create, :edit, :update]
     resources :emergencies, only: [:new, :create, :edit, :update]
   end
+  resources :sessions, only: :create
 end

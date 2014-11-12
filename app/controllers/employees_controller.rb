@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  before_action :require_user
   before_action :set_employees, only: [:show, :edit, :update]
 
   def new

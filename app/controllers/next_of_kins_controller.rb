@@ -1,4 +1,5 @@
 class NextOfKinsController < ApplicationController
+  before_action :require_user
   before_action :find_employee
   before_action :find_next_of_kin, only: [:edit, :update]
   before_action :find_next_of_kins_percentage, only: :new
