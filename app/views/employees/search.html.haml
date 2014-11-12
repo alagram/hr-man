@@ -20,6 +20,8 @@
         %td= link_to employee, employee_path(employee)
         %td= employee.dob
         %td= employee.gender.name
-        %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
+        %td
+          .text-center
+            = link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
 - else
   %h2.text-center{style: 'font-weight: normal; font-style: italic'}= "Your search - #{params[:q]} - did not find any records!"
