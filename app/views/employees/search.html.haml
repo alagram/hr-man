@@ -1,5 +1,5 @@
 - if @results.present?
-  - title "Displaying results for #{@results.first.first_name} #{@results.first.last_name} ... "
+  - title "Displaying results for #{params[:q]} ... "
 - else
   - title "Nothing found"
 
@@ -8,16 +8,18 @@
 = render "search_bar"
 
 %hr
-
-%table.table.table-bordered.table-striped
-  %tr
-    %th= "Full Name"
-    %th= "Date of Birth"
-    %th= "Gender"
-    %td
-  - @results.each do |employee|
+- if @results.present?
+  %table.table.table-bordered.table-striped
     %tr
-      %td= link_to employee, employee_path(employee)
-      %td= employee.dob
-      %td= employee.gender.name
-      %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
+      %th= "Full Name"
+      %th= "Date of Birth"
+      %th= "Gender"
+      %td
+    - @results.each do |employee|
+      %tr
+        %td= link_to employee, employee_path(employee)
+        %td= employee.dob
+        %td= employee.gender.name
+        %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
+- else
+  %h2.text-center{style: 'font-weight: normal; font-style: italic'}= "Your search - #{params[:q]} - did not find any records!"
