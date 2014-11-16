@@ -35,6 +35,13 @@ class EmployeesController < ApplicationController
 
   def search
     @results = Employee.includes(:gender).search(params[:q])
+
+    if @results.size == 1
+      redirect_to employee_path(@results.first.id)
+    else
+      @results
+    end
+
   end
 
   def search_suggestions
@@ -58,5 +65,8 @@ class EmployeesController < ApplicationController
 
   def set_employees
     @employee = Employee.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:danger] = "The employee you're looking for could not be found."
+    redirect_to employees_path
   end
 end
