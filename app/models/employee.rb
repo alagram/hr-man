@@ -2,6 +2,7 @@ class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :dob, :gender_id, :manager_id
   validates_format_of :cellphone, :officephone, :with => /^[0-9()-]+$/, :multiline => true
   validates_format_of :email, :with => /@/
+  validates_uniqueness_of :emp_id
 
   belongs_to :gender
   has_secure_password validations: false

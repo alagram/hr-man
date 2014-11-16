@@ -10,22 +10,26 @@ RSpec.describe Employee, :type => :model do
  it { should have_many(:next_of_kins) }
  it { should belong_to(:user_group) }
  it { should validate_presence_of(:manager_id) }
+ it { should validate_uniqueness_of(:emp_id) }
 
  describe "search" do
+
+  let(:manager) { Fabricate(:employee, manager_id: 1) }
+
   it "returns an array if one record is found" do
-    jane = Fabricate(:employee, emp_id: "E1", first_name: "Jane", last_name: "Smith", other_names: "Abena")
-    bob = Fabricate(:employee, emp_id: "E2", first_name: "Bob", last_name: "Doe")
+    jane = Fabricate(:employee, emp_id: "E1", first_name: "Jane", last_name: "Smith", other_names: "Abena", manager: manager)
+    bob = Fabricate(:employee, emp_id: "E2", first_name: "Bob", last_name: "Doe", manager: manager)
     expect(Employee.search("Jane Abena Smith")).to eq([jane])
   end
   it "returns an array if search for emp id is separated by commas" do
-    jane = Fabricate(:employee, emp_id: "emp_1", first_name: "Jane", last_name: "Smith", other_names: "Abena")
-    bob = Fabricate(:employee, emp_id: "emp_2", first_name: "Bob", last_name: "Doe", other_names: "Kofi")
-    alice = Fabricate(:employee, emp_id: "emp_3", first_name: "Alice", last_name: "Agram", other_names: "Ama")
+    jane = Fabricate(:employee, emp_id: "emp_1", first_name: "Jane", last_name: "Smith", other_names: "Abena", manager: manager)
+    bob = Fabricate(:employee, emp_id: "emp_2", first_name: "Bob", last_name: "Doe", manager: manager)
+    alice = Fabricate(:employee, emp_id: "emp_3", first_name: "Alice", last_name: "Agram", other_names: "Ama", manager: manager)
     expect(Employee.search("emp_1, emp_2, emp_3")).to eq([jane, bob, alice])
   end
   it "returns an empty array when no record is found" do
-    jane = Fabricate(:employee, emp_id: "emp_1", first_name: "Jane", last_name: "Smith", other_names: "Abena")
-    bob = Fabricate(:employee, emp_id: "emp_2", first_name: "Bob", last_name: "Doe", other_names: "Kofi")
+    jane = Fabricate(:employee, emp_id: "E1", first_name: "Jane", last_name: "Smith", other_names: "Abena", manager: manager)
+    bob = Fabricate(:employee, emp_id: "E2", first_name: "Bob", last_name: "Doe", manager: manager)
     expect(Employee.search("William")).to eq ([])
   end
  end
