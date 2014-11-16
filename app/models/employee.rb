@@ -16,7 +16,7 @@ class Employee < ActiveRecord::Base
       param = search_term.split(",").map(&:strip).map(&:downcase)
       where("lower(emp_id) IN (?)", param)
     else
-      find_by_sql("SELECT * from employees WHERE concat(lower(first_name), lower(other_names), lower(last_name)) like '%#{search_term.split.join}%'")
+      find_by_sql("SELECT * from employees WHERE concat(lower(first_name), lower(other_names), lower(last_name)) like '%#{search_term.split.join.downcase}%'")
     end
   end
 
