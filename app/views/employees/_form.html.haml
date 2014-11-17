@@ -5,6 +5,10 @@
     .col-sm-6
       = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
   .form-group
+    = f.label :employee_image, class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.file_field :employee_image, class: 'form-control btn btn-file'
+  .form-group
     = f.label :other_names, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :other_names, class: 'form-control', placeholder: 'Other Names'

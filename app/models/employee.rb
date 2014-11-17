@@ -4,6 +4,8 @@ class Employee < ActiveRecord::Base
   validates_format_of :email, :with => /@/
   validates_uniqueness_of :emp_id
 
+  mount_uploader :employee_image, EmployeeImageUploader
+
   belongs_to :gender
   has_secure_password validations: false
   has_many :emergencies

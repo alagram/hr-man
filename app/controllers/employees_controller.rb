@@ -60,7 +60,7 @@ class EmployeesController < ApplicationController
 
   def employee_params
     params.require(:employee).permit(:first_name, :last_name, :other_names, :emp_id, :dob, :gender_id, :user_group_id, :username, :password, :dept_id, :job_title_id, :type_id, :ssn, :race_id, :marital_id, :nationality_id,
-                                    :manager_name, :address1, :address2, :city_id, :state_id, :zipcode, :country_id, :email, :webpage, :homephone, :officephone, :cellphone, :regularhours, :basesalary, :start_date)
+                                    :manager_name, :address1, :address2, :city_id, :state_id, :zipcode, :country_id, :email, :webpage, :homephone, :officephone, :cellphone, :regularhours, :basesalary, :start_date, :employee_image)
   end
 
   def set_employees

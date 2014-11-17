@@ -17,8 +17,7 @@
   %div.col-md-4
     .jumbotron
       .text-center
-        = link_to employees_path, class: 'btn btn-primary btn-lg' do
-          \&#8592; Back
+        %img.img-thumbnail{src: "#{@employee.employee_image}", title: "image of #{@employee}", alt: "#{@employee}"}
 
 %br
 

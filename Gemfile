@@ -31,6 +31,9 @@ gem 'rack-mini-profiler'
 gem 'jquery-datatables-rails', '~> 2.2.3'
 gem 'bootstrap_form'
 gem 'nested_form'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do
