@@ -11,6 +11,8 @@ RSpec.describe Employee, :type => :model do
  it { should belong_to(:user_group) }
  it { should validate_presence_of(:manager_id) }
  it { should validate_uniqueness_of(:emp_id) }
+ it { should belong_to(:job_title) }
+ it { should belong_to(:nationality) }
 
   describe "search" do
 

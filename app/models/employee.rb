@@ -12,6 +12,9 @@ class Employee < ActiveRecord::Base
   has_many :next_of_kins
   belongs_to :manager, class_name: "Employee", foreign_key: "manager_id"
   belongs_to :user_group
+  belongs_to :job_title
+  belongs_to :nationality
+  belongs_to :ethnicity, class_name: "Race", foreign_key: "race_id"
 
   def self.search(search_term)
     return [] if search_term.blank?
