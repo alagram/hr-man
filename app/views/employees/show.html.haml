@@ -1,0 +1,126 @@
+- title "Details #{@employee.first_name} #{@employee.last_name}"
+
+%div.row
+  .col-md-8
+    .jumbotron
+      .navbar.navbar-default
+        .container-fluid
+          .navbar-header.navbar-brand
+            = "#{@employee}"
+            = "(#{@employee.emp_id})" if @employee.emp_id
+          %p.navbar-text.navbar-right
+            = link_to "Edit", edit_employee_path(@employee), class: 'navbar-link'
+      %table.table.ttable-bordered{:style => 'background: white'}
+        %thead
+          %tr
+            %th= "#"
+            %th= "#"
+            %th= "#"
+        %tbody
+          %tr
+            %td{:rowspan=> '2'}
+            %td.text-muted Job Title
+            %td.text-muted Line Manager
+          %tr
+            %td= @employee.job_title.name
+            %td= @employee.manager
+          %tr
+            %td{:rowspan=> '2'}
+            %td.text-muted Team
+            %td.text-muted Location
+          %tr
+            %td= @employee.user_group.name
+            %td= @employee
+          %tr
+            %td{:rowspan=> '2'}
+            %td.text-muted Ethnicity
+            %td.text-muted Nationality
+          %tr
+            %td= @employee.ethnicity.name
+            %td= @employee.nationality.name
+
+  %div.col-md-4
+    .jumbotron
+      .text-center
+        %img.img-thumbnail{src: "#{@employee.employee_image}", title: "image of #{@employee}", alt: "#{@employee}"}
+
+%br
+
+%div.row
+  %div.col.md-12
+    %ul.nav.nav-tabs
+      %li{:class => ('active' if params[:tab].nil?)}
+        =link_to "Next of Kin", employee_path(@employee)
+      %li{:class => ('active' if params[:tab] == 'emergency')}
+        =link_to "Emergency Contact", employee_path(@employee, tab: 'emergency')
+      %li{:class => ('active' if params[:tab] == 'address')}
+        =link_to "Address", employee_path(@employee, tab: 'address')
+      %li{:class => ('active' if params[:tab] == 'leavedetails')}
+        =link_to "Leave Details", employee_path(@employee, tab: 'leavedetails')
+
+- if params[:tab].nil?
+  %br
+  - if @employee.next_of_kins.empty?
+    %p.text-center= "No records available."
+  -else
+    %table.table.table-hover
+      %thead
+        %tr
+          %th= "Name"
+          %th= "Mobile"
+          %th= "Percentage"
+          %th= "Edit"
+      %tbody
+        - @employee.next_of_kins.each do |next_of_kin|
+          %tr
+            %td= next_of_kin
+            %td= next_of_kin.mobile
+            %td= next_of_kin.percentage
+            %td
+              = link_to edit_employee_next_of_kin_path(@employee, next_of_kin) do
+                %i.glyphicon.glyphicon-edit
+
+  %br
+  = link_to "Add Next of Kin", new_employee_next_of_kin_path(@employee), class: "btn btn-success"
+- elsif params[:tab] == 'address'
+  - if @employee.address1.present? || @employee.address2.present?
+    %br
+    %table.table.table-hover
+      %thead
+        %tr
+          %th= "Address 1"
+          %th= "Address 2" if @employee.address2
+      %tbody
+        %tr
+          %td= @employee.address1
+          %td= @employee.address2  if @employee.address2
+  - else
+    %br
+    %p.text-center= "No records available."
+- elsif params[:tab] == 'emergency'
+  - if @employee.emergencies.present?
+    %br
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+          %th= "Contact Name"
+          %th= "Contact Address"
+          %th= "Mobile"
+          %th= "Edit"
+      %tbody
+        - @employee.emergencies.each do |emergency|
+          %tr
+            %td
+            %td= emergency
+            %td= emergency.address1
+            %td= emergency.mobile
+            %td
+              = link_to edit_employee_emergency_path(@employee, emergency) do
+                %i.glyphicon.glyphicon-edit
+  - else
+    %br
+    %p.text-center= "No records available."
+  = link_to "Add Emergency Contact", new_employee_emergency_path(@employee), class: 'btn btn-success'
+
+%hr

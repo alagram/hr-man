@@ -1,0 +1,6 @@
+- title "Add Emergency Contact"
+.row
+  .col-sm-5
+    %h3= @emergency.new_record? ? "Add Emergency Contact" : "Update Emergency Contact"
+    %br
+      = render 'emergency_form'

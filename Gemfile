@@ -26,6 +26,14 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'autoprefixer-rails'
 gem 'jquery-ui-rails'
+gem 'will_paginate', '~> 3.0'
+gem 'rack-mini-profiler'
+gem 'jquery-datatables-rails', '~> 2.2.3'
+gem 'bootstrap_form'
+gem 'nested_form'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do
@@ -53,7 +61,7 @@ group :test, :development do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
 # gem 'unicorn'

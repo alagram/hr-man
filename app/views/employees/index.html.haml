@@ -1,19 +1,35 @@
-%h3 Employees
-%table.table.table-bordered.table-striped
-  %tr
-    %th= sortable "first_name"
-    %th= sortable "last_name"
-    %th= sortable "other_names"
-    %th= sortable "dob", "Date of Birth"
-    %th= sortable "gender_id", "Gender"
-    %td
-  - @employees.each do |employee|
-    %tr
-      %td= employee.first_name
-      %td= employee.last_name
-      %td= employee.other_names
-      %td= employee.dob
-      %td= employee.gender.sex
-      %td= link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
+- title "List Employees"
+.row
+  .col-md-8
+    = render "search_bar"
+  .col-md-4
+    .jumbotron
+      .text-center
+        = link_to "New Employee", new_employee_path, class: 'btn btn-success'
+
+
+
+%hr
+.jumbotron
+  %table#employees_table.display.responsive.no-wrap.table.table-bordered.table-striped{:style => 'background: white'}
+    %thead
+      %tr
+        %th= "Full Name"
+        %th= "Date of Birth"
+        %th= "Gender"
+        %th
+    %tbody
+      - @employees.each do |employee|
+        %tr
+          %td= link_to employee, employee_path(employee), title: "View details of #{employee}"
+          %td= employee.dob
+          %td= employee.gender.name
+          %td
+            .text-center
+              = link_to edit_employee_path(employee), title: "Edit #{employee}", class: 'btn btn-primary btn-xs' do
+                %i.glyphicon.glyphicon-edit
+                Edit
 
 = link_to "New Employee", new_employee_path, class: 'btn btn-primary'
+
+%hr

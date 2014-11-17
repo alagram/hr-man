@@ -1,9 +1,11 @@
 !!!
 %html
   %head
-    %title HrMan
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    %title= title
+    = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+    %meta{ name: 'keywords', content: meta_keywords }
+    %meta{ name: 'description', content: meta_description }
     = csrf_meta_tags
   %body
     = render 'shared/header'
@@ -11,3 +13,4 @@
       .row
         = render 'shared/messages'
       = yield
+    = render 'shared/footer'
