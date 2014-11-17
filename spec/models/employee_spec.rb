@@ -36,5 +36,9 @@ RSpec.describe Employee, :type => :model do
       jane = Fabricate(:employee, emp_id: "E1", first_name: "Jane", last_name: "Smith", other_names: "Abena", manager: manager)
       expect(Employee.search("ane")).to eq([jane])
     end
+    it "returns an empty array for a search with an empty string" do
+      jane = Fabricate(:employee, emp_id: "E1", first_name: "Jane", last_name: "Smith", other_names: "Abena", manager: manager)
+      expect(Employee.search("")).to eq([])
+    end
  end
 end

@@ -14,6 +14,7 @@ class Employee < ActiveRecord::Base
   belongs_to :user_group
 
   def self.search(search_term)
+    return [] if search_term.blank?
     if search_term.include?(",")
       param = search_term.split(",").map(&:strip).map(&:downcase)
       where("lower(emp_id) IN (?)", param)
