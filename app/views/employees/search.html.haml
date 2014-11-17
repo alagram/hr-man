@@ -24,4 +24,6 @@
           .text-center
             = link_to "Edit", edit_employee_path(employee), class: "btn btn-primary"
 - else
-  %h2.text-center{style: 'font-weight: normal; font-style: italic'}= "Your search - #{params[:q]} - did not find any records!"
+  .alert.alert-danger{role: 'alert'}
+    .text-center
+      = "Your search - #{params[:q]} - did not find any records!"
