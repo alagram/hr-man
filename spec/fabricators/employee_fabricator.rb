@@ -8,5 +8,6 @@ Fabricator(:employee) do
   cellphone { %w(0800-12345 0800-54321 0800-098765 0234-1112234).sample }
   officephone { %w(0800-12345 0800-54321 0800-098765 0234-1112234).sample }
   password { Faker::Internet.password }
+  manager_id { (1..10).to_a.sample }
   gender
 end
