@@ -3,7 +3,7 @@
     %h3= @next_of_kin.new_record? ? "Add Next of Kin" : "Update Next of Kin"
     %br
     = bootstrap_nested_form_for [@employee, @next_of_kin] do |f|
-      = f.text_field :title, placeholder: 'Title'
+      = f.select :title, [["Mr", "Mr"], ["Miss", "Miss"], ["Missus", "Missus"], ["Other", "Other"]], { label: "Select title" }
       = f.text_field :first_name, placeholder: 'First Name'
       = f.text_field :other_names, placeholder: 'Other Names'
       = f.text_field :last_name, placeholder: 'Last Name'
