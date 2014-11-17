@@ -3,17 +3,42 @@
 %div.row
   .col-md-8
     .jumbotron
-      %table.table.table-striped{:style => 'background: white'}
+      .navbar.navbar-default
+        .container-fluid
+          .navbar-header.navbar-brand
+            = "#{@employee}"
+            = "(#{@employee.emp_id})" if @employee.emp_id
+          %p.navbar-text.navbar-right
+            = link_to "Edit", edit_employee_path(@employee), class: 'navbar-link'
+      %table.table.ttable-bordered{:style => 'background: white'}
         %thead
           %tr
-            %th= "Full Name"
-            %th= "Date of Birth"
-            %th= "Gender"
+            %th= "#"
+            %th= "#"
+            %th= "#"
         %tbody
           %tr
+            %td{:rowspan=> '2'}
+            %td.text-muted Job Title
+            %td.text-muted Line Manager
+          %tr
+            %td= @employee.job_title.name
+            %td= @employee.manager
+          %tr
+            %td{:rowspan=> '2'}
+            %td.text-muted Team
+            %td.text-muted Location
+          %tr
+            %td= @employee.user_group.name
             %td= @employee
-            %td= @employee.dob
-            %td= @employee.gender.name
+          %tr
+            %td{:rowspan=> '2'}
+            %td.text-muted Ethnicity
+            %td.text-muted Nationality
+          %tr
+            %td= @employee.ethnicity.name
+            %td= @employee.nationality.name
+
   %div.col-md-4
     .jumbotron
       .text-center
@@ -97,3 +122,5 @@
     %br
     %p.text-center= "No records available."
   = link_to "Add Emergency Contact", new_employee_emergency_path(@employee), class: 'btn btn-success'
+
+%hr
