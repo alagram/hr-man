@@ -20,18 +20,20 @@ Department.create(name: "Legal", isactive: true)
 Gender.create(name: "Male", isactive: true)
 Gender.create(name: "Female", isactive: true)
 
-JobTitle.create(name: "Web Developer", isactive: true)
-JobTitle.create(name: "CMO", isactive: true)
-JobTitle.create(name: "CTO", isactive: true)
-JobTitle.create(name: "CFO", isactive: true)
+dev = JobTitle.create(name: "Web Developer", isactive: true)
+cmo = JobTitle.create(name: "CMO", isactive: true)
+cto = JobTitle.create(name: "CTO", isactive: true)
+cfo = JobTitle.create(name: "CFO", isactive: true)
 
-Nationality.create(name: "Ghanaian", isactive: true)
-Nationality.create(name: "American", isactive: true)
-Nationality.create(name: "British", isactive: true)
+ghana = Nationality.create(name: "Ghanaian", isactive: true)
+america = Nationality.create(name: "American", isactive: true)
+british = Nationality.create(name: "British", isactive: true)
 
-Race.create(name: "Black", isactive: true)
-Race.create(name: "White", isactive: true)
-Race.create(name: "Latino", isactive: true)
+
+
+black = Race.create(name: "Black", isactive: true)
+white = Race.create(name: "White", isactive: true)
+latino = Race.create(name: "Latino", isactive: true)
 
 State.create(name: "Ashanti Region", isactive: true)
 State.create(name: "Greater Accra", isactive: true)
@@ -48,18 +50,21 @@ line_manager = UserGroup.create(name: "Line Manager", isactive: true)
 team_lead = UserGroup.create(name: "Team Lead", isactive: true)
 direct_report = UserGroup.create(name: "Direct Report", isactive: true)
 
-manager_1 = Employee.create!(first_name: "Albert", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: team_lead.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", emp_id: "EMP01", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, employee_image: Faker::Avatar.image)
-manager_2 = Employee.create!(first_name: "Mawunyo", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: line_manager.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", emp_id: "EMP02", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, employee_image: Faker::Avatar.image)
-manager_2 = Employee.create!(first_name: "Esinam", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: line_manager.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", emp_id: "EMP03", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, employee_image: Faker::Avatar.image)
+manager_1 = Employee.create!(first_name: "Albert", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: team_lead.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", emp_id: "EMP01", password: "password", email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, remote_employee_image_url: Faker::Avatar.image, job_title_id: cto.id, nationality_id: ghana.id, ethnicity: black)
+manager_2 = Employee.create!(first_name: "Mawunyo", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: line_manager.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", emp_id: "EMP02", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, remote_employee_image_url: Faker::Avatar.image, job_title_id: cfo.id, nationality_id: america.id, ethnicity: white)
+manager_3 = Employee.create!(first_name: "Esinam", last_name: Faker::Name.last_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"), gender_id: male.id, user_group_id: line_manager.id, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", emp_id: "EMP03", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, remote_employee_image_url: Faker::Avatar.image, job_title_id: dev.id, nationality_id: british.id, ethnicity: latino)
 
 30.times do
   Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, dob: Faker::Date.backward(7300).strftime("%Y-%m-%d"),
                     gender_id: male.id, user_group_id: direct_report.id, manager: manager_1, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}",
-                    emp_id: "EMP#{rand(100)}", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, employee_image: Faker::Avatar.image)
-  Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, dob: Faker::Date.backward(14600).strftime("%Y-%m-%d"), gender_id: female.id, user_group_id: direct_report.id, manager: manager_2, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, employee_image: Faker::Avatar.image)
+                    emp_id: "EMP#{rand(100)}", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, remote_employee_image_url: Faker::Avatar.image, job_title_id: cfo.id, nationality_id: ghana.id, ethnicity: black)
+  Employee.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, dob: Faker::Date.backward(14600).strftime("%Y-%m-%d"), gender_id: female.id, user_group_id: direct_report.id, manager: manager_2, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", password: Faker::Internet.password, email: Faker::Internet.email, cellphone: Faker::PhoneNumber.cell_phone, officephone: Faker::PhoneNumber.cell_phone, remote_employee_image_url: Faker::Avatar.image, job_title_id: dev.id, nationality_id: america.id, ethnicity: white)
 end
 
-Employee.each do |employee|
-  NextOfKin.create(title: Faker::Name.prefix, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, telephone: Faker::PhoneNumber.phone_number, mobile: Faker::PhoneNumber.cell_phone, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", percentance: rand(100), employee: employee)
+Employee.all.each do |employee|
+  NextOfKin.create(title: Faker::Name.prefix, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, telephone: Faker::PhoneNumber.phone_number, mobile: Faker::PhoneNumber.cell_phone, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", percentage: rand(100), employee: employee)
+end
+
+Employee.all.each do |employee|
   Emergency.create(title: Faker::Name.prefix, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, other_names: Faker::Name.first_name, telephone: Faker::PhoneNumber.phone_number, address1: "#{Faker::Address.street_address}, #{Faker::Address.state}", mobile: Faker::PhoneNumber.cell_phone, employee: employee)
 end
