@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118075206) do
+ActiveRecord::Schema.define(version: 20141120113710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20141118075206) do
     t.string   "dob"
     t.integer  "gender_id"
     t.string   "emp_id"
-    t.integer  "dept_id"
+    t.integer  "department_id"
     t.integer  "job_title_id"
     t.integer  "type_id"
     t.string   "ssn"
