@@ -24,6 +24,25 @@
                   = link_to employees_path do
                     %i.glyphicon.glyphicon-th-list
                     View Employees
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Leave Menu
+                %span.caret
+              %ul.dropdown-menu{:role => "menu"}
+                %li
+                  = link_to '#' do
+                    %i.glyphicon.glyphicon-plus
+                    Book Leave
+                %li
+                  %a{:href => "#"} My Leave History
+                %li
+                  %a{:href => "#"} Report
+                - if super_user?
+                  %li
+                    %a{:href => "#"} Pending Requests
+                  %li
+                    %a{:href => "#"} Team History
           %ul.nav.navbar-nav.navbar-right
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
