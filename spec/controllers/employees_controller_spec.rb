@@ -15,4 +15,17 @@ RSpec.describe EmployeesController, :type => :controller do
       expect(response).to redirect_to jane
     end
   end
+
+  describe "GET #index" do
+    it "redirects to welcome_path if user is not a super user" do
+      set_current_user
+      get :index
+      expect(response).to redirect_to welcome_path
+    end
+    it "renders the index template if user is super user" do
+      set_super_user
+      get :index
+      expect(response).to render_template :index
+    end
+  end
 end

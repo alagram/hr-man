@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
   def super_user?
     current_user.admin? if current_user
   end
+
+  def require_super_user
+    unless current_user.admin?
+      redirect_to welcome_path
+      flash[:danger] = "You are not authorised to do that."
+    end
+  end
 end

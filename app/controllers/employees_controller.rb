@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :require_user
   before_action :set_employees, only: [:show, :edit, :update]
+  before_action :require_super_user, only: :index
 
   def new
     @employee = Employee.new
