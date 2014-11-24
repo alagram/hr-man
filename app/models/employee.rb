@@ -15,6 +15,9 @@ class Employee < ActiveRecord::Base
   belongs_to :job_title
   belongs_to :nationality
   belongs_to :ethnicity, class_name: "Race", foreign_key: "race_id"
+  belongs_to :department
+  belongs_to :marital
+  belongs_to :type
 
   def self.search(search_term)
     return [] if search_term.blank?
