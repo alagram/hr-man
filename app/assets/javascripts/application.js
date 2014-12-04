@@ -18,4 +18,6 @@
 //= require dataTables/extras/dataTables.responsive
 //= require jquery_ujs
 //= require bootstrap
+//= require ckeditor/init
+//= require chosen-jquery
 //= require_tree .

@@ -1,0 +1,36 @@
+- title "Book Leave"
+
+= render 'shared/errors', object: @leave_request
+
+.col-md-6.jumbotron
+  .form-group.col-lg-6
+    %h3 Book Leave
+  = form_for(@leave_request) do |f|
+    .form-group.col-lg-12
+      = f.label :leave_type_id, "Leave Type"
+      = f.select :leave_type_id, LeaveType.all.map {|leave_type| [leave_type.name, leave_type.id]}, {prompt: 'Select Leave Type'}, required: true, class: "form-control"
+    .form-group.col-lg-6
+      = f.label :date_from, "Date From"
+      = f.text_field :date_from, class: "form-control"
+    .form-group.col-lg-6
+      = f.label :date_to, "Date To"
+      = f.text_field :date_to, class: "form-control"
+    .form-group.col-lg-6#leave-request-radio-full
+      %label.radio-inline
+        = f.radio_button :day_type, "full"
+        = f.label :day_type, "Full Day"
+    .form-group.col-lg-6#leave-request-radio-half
+      %label.radio-inline
+        = f.radio_button :day_type, "half"
+        = f.label :day_type, "Half Day"
+    .form-group.col-lg-12
+      = f.label :relievers, "Relievers"
+      = f.select :relievers, Employee.all.map {|employee| [employee.first_last_name, employee.id]}, {}, multiple: true, class: "form-control"
+    .form-group.col-lg-12
+      = f.label :hand_over_notes, "Hand Over Notes"
+      = f.cktext_area :hand_over_notes, class: "form-control", rows: 8, :ckeditor => { :language => 'en' , :toolbar => 'mini'}
+    .form-group.col-lg-6
+      = f.label :evidence, "Upload Evidence"
+      = f.file_field :evidence, class: "form-control"
+    .form-group.col-lg-12
+      %button.btn.btn-primary Save
