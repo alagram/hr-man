@@ -3,9 +3,9 @@
 .content
   = form_tag sessions_path, autocomplete: "off" do
     .form-group
-      = text_field_tag :emp_id, nil, class: "form-control", placeholder: "Staff ID", autofocus: ''
+      = text_field_tag :emp_id, nil, class: "my-signin-tag form-control", placeholder: "Staff ID", autofocus: ''
     .form-group
-      = password_field_tag :password, nil, class: "form-control", placeholder: "Password"
+      = password_field_tag :password, nil, class: "my-signin-tag form-control", placeholder: "Password"
     .form-group
       %button.btn.btn-success.btn-custom Sign In
 
