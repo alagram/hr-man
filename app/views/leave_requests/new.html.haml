@@ -8,13 +8,11 @@
   = form_for(@leave_request) do |f|
     .form-group.col-lg-12
       = f.label :leave_type_id, "Leave Type"
-      = f.select :leave_type_id, LeaveType.all.map {|leave_type| [leave_type.name, leave_type.id]}, {prompt: 'Select Leave Type'}, required: true, class: "form-control"
-    .form-group.col-lg-6
+      = f.select :leave_type_id, LeaveType.all.map {|leave_type| [leave_type.name, leave_type.id]}, {prompt: 'Select Leave Type'}, class: "form-control"
+    .form-group.col-lg-12
       = f.label :date_from, "Date From"
-      = f.text_field :date_from, class: "form-control"
-    .form-group.col-lg-6
-      = f.label :date_to, "Date To"
-      = f.text_field :date_to, class: "form-control"
+      = f.text_field :date_from, class: "form-control", autocomplete: "off"
+      %br
     .form-group.col-lg-6#leave-request-radio-full
       %label.radio-inline
         = f.radio_button :day_type, "full"
@@ -23,14 +21,18 @@
       %label.radio-inline
         = f.radio_button :day_type, "half"
         = f.label :day_type, "Half Day"
+    .form-group.col-lg-6
+      = f.text_field :num_of_days, class: "form-control", autocomplete: "off", placeholder: "Number of Days"
+    .form-group.col-lg-6
+      %button.btn.btn-primary#get-end-date Get End Date
     .form-group.col-lg-12
       = f.label :relievers, "Relievers"
       = f.select :relievers, Employee.all.map {|employee| [employee.first_last_name, employee.id]}, {}, multiple: true, class: "form-control"
     .form-group.col-lg-12
       = f.label :hand_over_notes, "Hand Over Notes"
-      = f.cktext_area :hand_over_notes, class: "form-control", rows: 8, :ckeditor => { :language => 'en' , :toolbar => 'mini'}
+      = f.cktext_area :hand_over_notes, class: "form-control", rows: 8, :ckeditor => { :language => 'en' , :toolbar => 'mini'}, autocomplete: "off"
     .form-group.col-lg-6
       = f.label :evidence, "Upload Evidence"
-      = f.file_field :evidence, class: "form-control"
+      = f.file_field :evidence, class: "form-control", autocomplete: "off"
     .form-group.col-lg-12
       %button.btn.btn-primary Save
