@@ -14,7 +14,7 @@ $(document).ready(function() {
     }
     else {
       $("#leave-request-radio-half").hide();
-      $("#leave-request-radio-full").show();
+      $("#leave-request-radio-full").hide();
     }
   });
 });
@@ -22,9 +22,6 @@ $(document).ready(function() {
 $(document).ready(function() {
   $("#leave_request_date_from").datepicker(
       { dateFormat: "yy-mm-dd" }
-    );
-  $("#leave_request_date_to").datepicker(
-    { dateFormat: "yy-mm-dd" }
     );
 });
 
