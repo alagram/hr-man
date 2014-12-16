@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     resources :emergencies, only: [:new, :create, :edit, :update]
   end
   resources :sessions, only: :create
-  resources :leave_requests, only: [:new, :create]
+  resources :leave_requests, only: [:new, :create] do
+    collection do
+      get 'get_end_date'
+    end
+  end
 end

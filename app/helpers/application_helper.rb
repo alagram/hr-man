@@ -22,4 +22,17 @@ module ApplicationHelper
       content_for?(:meta_description) ? content_for(:meta_description) : APP_CONFIG['meta_description']
     end
   end
+
+  def ajax_flash(div_id)
+    response = ""
+    flash_div = ""
+
+    flash.each do |name, msg|
+      if msg.is_a?(String)
+        flash_div = "<div class=\"alert alert-#{name == 'success' ? 'success' : 'danger'} ajax_flash\"><a class=\"close\" data-dismiss=\"alert\">&#215;</a> <div id=\"flash_#{name == 'success' ? 'success' : 'danger'}\">#{h(msg)}</div> </div>"
+      end
+    end
+    response = "$('.ajax_flash').remove();$('#{div_id}').prepend('#{flash_div}');"
+    response.html_safe
+  end
 end

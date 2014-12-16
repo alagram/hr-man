@@ -22,7 +22,21 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
-
+  def get_end_date
+    if params[:date].present? && params[:days].present?
+      @leave_calculator = LeavePolicyCalculator.new(params[:date], params[:days])
+      @end_date = @leave_calculator.get_end_date(check_weekend: true, check_holiday: true)
+    end
+    respond_to do |format|
+      format.js do
+        if @end_date.present?
+          flash.now[:success] = "You will resume work on #{@end_date.strftime("%A %B %d, %Y")}"
+        else
+          flash.now[:danger] = "Please check your input and try again."
+        end
+      end
+    end
+  end
 
   private
 
