@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202115309) do
+ActiveRecord::Schema.define(version: 20141211123342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,10 +134,10 @@ ActiveRecord::Schema.define(version: 20141202115309) do
 
   create_table "holidays", force: true do |t|
     t.string   "name"
-    t.date     "datetime"
     t.boolean  "isactive"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "hol_date"
   end
 
   create_table "job_titles", force: true do |t|
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 20141202115309) do
     t.integer  "leave_statuses_id"
     t.string   "evidence"
     t.string   "relievers",         default: [], array: true
+    t.string   "num_of_days"
   end
 
   create_table "leave_statuses", force: true do |t|
@@ -221,7 +222,7 @@ ActiveRecord::Schema.define(version: 20141202115309) do
   create_table "leave_types", force: true do |t|
     t.string   "name"
     t.integer  "company_id"
-    t.integer  "emptype"
+    t.integer  "emp_type"
     t.integer  "user_id"
     t.string   "user_ip"
     t.boolean  "isactive"
