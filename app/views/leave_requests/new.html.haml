@@ -28,6 +28,7 @@
     .form-group.col-lg-12
       = f.label :relievers, "Relievers"
       = f.select :relievers, Employee.all.map {|employee| [employee.first_last_name, employee.id]}, {}, multiple: true, class: "form-control"
+      %span.help-block Select maximum of 3 relievers.
     .form-group.col-lg-12
       = f.label :hand_over_notes, "Hand Over Notes"
       = f.cktext_area :hand_over_notes, class: "form-control", rows: 8, :ckeditor => { :language => 'en' , :toolbar => 'mini'}, autocomplete: "off"
