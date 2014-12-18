@@ -38,6 +38,40 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def check_leave_bal
+    respond_to do |format|
+      format.js do
+        sub_query = EndOfYear.where(isactive: true).select(:current_year).order(:current_year).to_sql
+        if params[:leave_option].present?
+          if params[:day_type] == "half"
+            @leave_record = LeaveRecord.where("rec_year = (#{sub_query})
+                                              and emp_id = :user_id
+                                              and leave_type_id = :leave_option
+                                              and days_left >= :days
+                                              and isactive = :active",
+                                              user_id: "#{current_user.id}",
+                                              leave_option: "#{params[:leave_option]}",
+                                              days: "#{params[:num_days]}".to_i / 2, active: true).first
+          else
+            @leave_record = LeaveRecord.where("rec_year = (#{sub_query})
+                                              and emp_id = :user_id
+                                              and leave_type_id = :leave_option
+                                              and days_left >= :days
+                                              and isactive = :active",
+                                              user_id: "#{current_user.id}",
+                                              leave_option: "#{params[:leave_option]}",
+                                              days: "#{params[:num_days]}", active: true).first
+          end
+          if @leave_record.nil?
+            flash.now[:danger] = "You do not have enough days to book this leave."
+          end
+        else
+          flash.now[:danger] = "Please select leave type."
+        end
+      end
+    end
+  end
+
   private
 
   def leave_request_params

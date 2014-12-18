@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :leave_requests, only: [:new, :create] do
     collection do
       get 'get_end_date'
+      get 'check_leave_bal'
     end
   end
 end

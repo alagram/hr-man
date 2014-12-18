@@ -1,0 +1,7 @@
+<%= ajax_flash("#content-div") %>
+
+<% if @leave_record.nil? %>
+  $("#get-end-date").attr('disabled', 'disabled');
+<% else %>
+  $("#get-end-date").removeAttr('disabled');
+<% end %>
