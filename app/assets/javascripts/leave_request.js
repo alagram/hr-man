@@ -13,6 +13,7 @@ $(document).ready(function() {
       $("#leave-request-radio-half").hide();
     }
     else {
+      $("input[name='leave_request[day_type]']").prop('checked', false);
       $("#leave-request-radio-half").hide();
       $("#leave-request-radio-full").hide();
     }
