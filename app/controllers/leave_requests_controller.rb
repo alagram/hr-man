@@ -75,6 +75,8 @@ class LeaveRequestsController < ApplicationController
   private
 
   def leave_request_params
-    params.require(:leave_request).permit(:leave_type_id, :date_from, :day_type, :hand_over_notes, :evidence, :num_of_days, :relievers => [])
+    params.require(:leave_request).permit(:leave_type_id, :date_from,
+                  :day_type, :hand_over_notes, :evidence,
+                  :num_of_days, :relievers => [])
   end
 end
