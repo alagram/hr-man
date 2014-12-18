@@ -4,10 +4,14 @@ class LeaveRequestsController < ApplicationController
   end
 
   def create
-    if leave_request_params[:leave_type_id] == "5"
-      @leave_request = LeaveRequest.new(leave_request_params.merge!(employee: current_user, leave_year: Date.today.year, date_booked: Date.today, isactive: true))
+    if leave_request_params[:leave_type_id] == "5" && leave_request_params[:day_type] == "half"
+      @leave_request = LeaveRequest.new(leave_request_params.merge!(employee: current_user,
+                                        leave_year: Date.today.year, date_booked: Date.today,
+                                        isactive: true, num_of_days: leave_request_params[:num_of_days].to_i / 2.to_f))
     else
-      @leave_request = LeaveRequest.new(leave_request_params.merge!(employee: current_user, day_type: "full", leave_year: Date.today.year, date_booked: Date.today, isactive: true))
+      @leave_request = LeaveRequest.new(leave_request_params.merge!(employee: current_user,
+                                        day_type: "full", leave_year: Date.today.year,
+                                        date_booked: Date.today, isactive: true))
     end
 
     if @leave_request.valid?
