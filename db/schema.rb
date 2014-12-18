@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211123342) do
+ActiveRecord::Schema.define(version: 20141217192402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,11 @@ ActiveRecord::Schema.define(version: 20141211123342) do
     t.boolean  "admin",           default: false
   end
 
+  create_table "end_of_years", force: true do |t|
+    t.string  "current_year"
+    t.boolean "isactive"
+  end
+
   create_table "genders", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -181,15 +186,15 @@ ActiveRecord::Schema.define(version: 20141211123342) do
 
   create_table "leave_records", force: true do |t|
     t.integer  "leave_type_id"
-    t.string   "year"
+    t.string   "rec_year"
     t.integer  "emp_id"
-    t.integer  "taken"
-    t.integer  "left"
     t.integer  "carried_over"
     t.boolean  "archive"
     t.boolean  "isactive"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "days_left"
+    t.float    "days_taken"
   end
 
   create_table "leave_requests", force: true do |t|
