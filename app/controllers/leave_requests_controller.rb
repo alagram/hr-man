@@ -51,7 +51,7 @@ class LeaveRequestsController < ApplicationController
                                               and isactive = :active",
                                               user_id: "#{current_user.id}",
                                               leave_option: "#{params[:leave_option]}",
-                                              days: "#{params[:num_days]}".to_i / 2, active: true).first
+                                              days: "#{params[:num_days]}".to_i / 2.to_f, active: true).first
           else
             @leave_record = LeaveRecord.where("rec_year = (#{sub_query})
                                               and emp_id = :user_id
