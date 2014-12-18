@@ -57,6 +57,6 @@ class LeavePolicyCalculator
   end
 
   def get_holidays
-    Holiday.pluck(:hol_date)
+    @holidays ||= Holiday.pluck(:hol_date)
   end
 end
