@@ -1,0 +1,16 @@
+<%= ajax_flash("#content-div") %>
+
+<% if @record["bookable_by"] === "bits" && @record["days_left"].to_i == 0 %>
+  $('#leave_request_num_of_days').val("<%= @record['days_left'] %>").prop('disabled', true);
+  $("#get-end-date").prop('disabled', true);
+  $('#save-leave').prop('disabled', true);
+<% elsif @record["bookable_by"] === "bits" && @record["days_left"].to_i > 0 %>
+  $('#leave_request_num_of_days').val("").prop('disabled', false);
+  $('#leave_request_num_of_days').val("").prop('readonly', false);
+  $("#get-end-date").prop('disabled', false);
+  $('#save-leave').prop('disabled', false);
+<% elsif @record["bookable_by"] === "whole" && @record["days_left"].to_i > 0  %>
+  $('#leave_request_num_of_days').val("<%= @record['days_left'] %>").prop('readonly', true);
+  $('#save-leave').prop('disabled', false);
+  $("#get-end-date").prop('disabled', false);
+<% end %>
