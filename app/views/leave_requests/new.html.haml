@@ -8,7 +8,7 @@
   = form_for(@leave_request) do |f|
     .form-group.col-lg-12
       = f.label :leave_type_id, "Leave Type"
-      = f.select :leave_type_id, LeaveType.all.map {|leave_type| [leave_type.name, leave_type.id]}, {prompt: 'Select Leave Type'}, class: "form-control"
+      = f.select :leave_type_id, options_for_leave_types, {prompt: 'Select Leave Type'}, class: "form-control"
     .form-group.col-lg-12
       = f.label :date_from, "Date From"
       = f.text_field :date_from, class: "form-control", autocomplete: "off"
@@ -27,7 +27,7 @@
       %button.btn.btn-primary#get-end-date Get End Date
     .form-group.col-lg-12
       = f.label :relievers, "Relievers"
-      = f.select :relievers, Employee.all.map {|employee| [employee.first_last_name, employee.id]}, {}, multiple: true, class: "form-control"
+      = f.select :relievers, list_colleagues, {}, multiple: true, class: "form-control"
       %span.help-block Select maximum of 3 relievers.
     .form-group.col-lg-12
       = f.label :hand_over_notes, "Hand Over Notes"
@@ -36,4 +36,4 @@
       = f.label :evidence, "Upload Evidence"
       = f.file_field :evidence, class: "form-control", autocomplete: "off"
     .form-group.col-lg-12
-      %button.btn.btn-primary Save
+      %button.btn.btn-primary#save-leave Save
