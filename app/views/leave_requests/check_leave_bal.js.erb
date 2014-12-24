@@ -1,7 +1,31 @@
 <%= ajax_flash("#content-div") %>
 
-<% if @leave_record.nil? %>
-  $("#get-end-date").attr('disabled', 'disabled');
+<% if @leave_record %>
+  $("#get-end-date").prop('disabled', false);
+  $('#save-leave').prop('disabled', false);
 <% else %>
-  $("#get-end-date").removeAttr('disabled');
+  $("#get-end-date").prop('disabled', true);
+  $('#save-leave').prop('disabled', true);
+<% end %>
+
+// Check max and enable disable save and get-end-date buttons (half-day)
+<% if params[:day_type] == "half" %>
+  <% if params[:num_days].to_f / 2 > @max_bookable.max_days %>
+    $("#get-end-date").prop('disabled', true);
+    $('#save-leave').prop('disabled', true);
+  <% else %>
+    $("#get-end-date").prop('disabled', false);
+    $('#save-leave').prop('disabled', false);
+  <% end %>
+<% end %>
+
+// Check max and enable disable save and get-end-date buttons (full-day)
+<% if params[:day_type] == 'full' %>
+  <% if params[:num_days].to_i > @max_bookable.max_days %>
+    $("#get-end-date").prop('disabled', true);
+    $('#save-leave').prop('disabled', true);
+  <% else %>
+    $("#get-end-date").prop('disabled', false);
+    $('#save-leave').prop('disabled', false);
+  <% end %>
 <% end %>
