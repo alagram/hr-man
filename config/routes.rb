@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   resources :sessions, only: :create
   resources :leave_requests, only: [:new, :create] do
     collection do
-      get 'get_end_date'
-      get 'check_leave_bal'
+      post 'get_end_date'
+      post 'check_leave_bal'
+      post 'confirm_leave_days'
     end
   end
 end
