@@ -35,4 +35,13 @@ module ApplicationHelper
     response = "$('.ajax_flash').remove();$('#{div_id}').prepend('#{flash_div}');"
     response.html_safe
   end
+
+  def options_for_leave_types
+    sub_select = EndOfYear.select(:current_year).where(isactive: true)
+    LeaveRecord.joins(:leave_type).where(rec_year: sub_select, emp_id: current_user.id).distinct.order('name ASC').pluck(:name, :leave_type_id)
+  end
+
+  def list_colleagues
+    Employee.all.map {|employee| [employee.first_last_name, employee.id] if current_user.manager == employee.manager}.compact.delete_if {|emp| emp.first == "#{current_user.first_last_name}"}
+  end
 end
