@@ -3,7 +3,6 @@
   %head
     %title= title
     = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
     %meta{ name: 'keywords', content: meta_keywords }
     %meta{ name: 'description', content: meta_description }
     = csrf_meta_tags
@@ -14,5 +13,6 @@
         #content-div.col-md-10.col-md-offset-1
         = render 'shared/messages'
       = yield
+      = javascript_include_tag 'application'
     %footer
       = render 'shared/footer'
