@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218095138) do
+ActiveRecord::Schema.define(version: 20141222211823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 20141218095138) do
     t.integer  "gender_id"
     t.string   "option"
     t.integer  "entitlement"
-    t.integer  "max"
+    t.integer  "max_days"
     t.boolean  "carry_forward"
     t.string   "bookable_by"
     t.integer  "service_period_limitation"
