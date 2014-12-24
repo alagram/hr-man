@@ -1,14 +1,19 @@
 $(document).ready(function() {
+  showHideDayType();
+  dateFromDatePicker();
+});
+
+function showHideDayType() {
   $("#leave-request-radio-full").hide();
   $("#leave-request-radio-half").hide();
   var menu = $("#leave_request_leave_type_id");
   menu.change(function() {
-    var option_text = $("#leave_request_leave_type_id :selected").text();
-    if (option_text === "Annual Leave") {
+    var optionText = $("#leave_request_leave_type_id :selected").text();
+    if (optionText === "Annual Leave") {
       $("#leave-request-radio-half").show();
       $("#leave-request-radio-full").show();
     }
-    else if (option_text === "Select Leave Type") {
+    else if (optionText === "Select Leave Type") {
       $("#leave-request-radio-full").hide();
       $("#leave-request-radio-half").hide();
     }
@@ -18,12 +23,12 @@ $(document).ready(function() {
       $("#leave-request-radio-full").hide();
     }
   });
-});
+}
 
-$(document).ready(function() {
+function dateFromDatePicker() {
   $("#leave_request_date_from").datepicker(
-      { dateFormat: "yy-mm-dd" }
-    );
-});
+    { dateFormat: "yy-mm-dd" }
+  );
+}
 
 
