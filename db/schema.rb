@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222211823) do
+ActiveRecord::Schema.define(version: 20141229103859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 20141222211823) do
   create_table "leave_records", force: true do |t|
     t.integer  "leave_type_id"
     t.string   "rec_year"
-    t.integer  "emp_id"
+    t.integer  "employee_id"
     t.integer  "carried_over"
     t.boolean  "archive"
     t.boolean  "isactive"

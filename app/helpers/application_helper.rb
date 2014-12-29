@@ -38,7 +38,7 @@ module ApplicationHelper
 
   def options_for_leave_types
     sub_select = EndOfYear.select(:current_year).where(isactive: true)
-    LeaveRecord.joins(:leave_type).where(rec_year: sub_select, emp_id: current_user.id).distinct.order('name ASC').pluck(:name, :leave_type_id)
+    LeaveRecord.joins(:leave_type).where(rec_year: sub_select, employee_id: current_user.id).distinct.order('name ASC').pluck(:name, :leave_type_id)
   end
 
   def list_colleagues

@@ -22,14 +22,14 @@ class LeaveRequestsController < ApplicationController
       entitlement = LeaveType.select(:entitlement).where(id: leave_request_params[:leave_type_id]).to_sql
 
       if LeaveRecord.connection.update("UPDATE leave_records set days_left = days_left - #{leave_request_params[:num_of_days].to_i},
-                            days_taken = days_taken + #{leave_request_params[:num_of_days].to_i} WHERE emp_id = #{current_user.id}
+                            days_taken = days_taken + #{leave_request_params[:num_of_days].to_i} WHERE employee_id = #{current_user.id}
                             and (days_left + days_taken) = (#{entitlement})
                             and (days_left - #{leave_request_params[:num_of_days].to_i}) >= 0") && leave_bal
         leave_calculator = LeavePolicyCalculator.new(leave_request_params[:date_from],
                                                     leave_request_params[:num_of_days])
         return_date = leave_calculator.get_end_date(check_weekend: true, check_holiday: true)
         @leave_request.date_to = return_date
-        @leave_request.days_left = LeaveRecord.where(emp_id: current_user.id, leave_type_id: leave_request_params[:leave_type_id]).first.days_left
+        @leave_request.days_left = LeaveRecord.where(employee_id: current_user.id, leave_type_id: leave_request_params[:leave_type_id]).first.days_left
         @leave_request.save
         redirect_to new_leave_request_path
         flash[:success] = "Leave Request successfuly created. You will resume on #{return_date.strftime("%A %B %d, %Y")}."
@@ -94,13 +94,13 @@ class LeaveRequestsController < ApplicationController
       format.js do
         @record = ActiveRecord::Base.connection.execute("SELECT t.id, t.name, t.bookable_by,
                                       t.max_days, t.entitlement, r.rec_year,
-                                      r.emp_id, r.days_left, r.days_taken
+                                      r.employee_id, r.days_left, r.days_taken
                                       FROM leave_records AS r
                                       LEFT JOIN leave_types as t
                                       ON r.leave_type_id = t.id
                                       where
                                       r.rec_year = (select current_year from end_of_years where isactive = true)
-                                      and r.emp_id = #{current_user.id}
+                                      and r.employee_id = #{current_user.id}
                                       and r.leave_type_id = #{params[:leave_type]}").to_a.first
 
         if @record["days_left"].to_i == 0
@@ -121,7 +121,7 @@ class LeaveRequestsController < ApplicationController
   def check_bookable_balance(leave_type, num_days)
     sub_query = EndOfYear.where(isactive: true).select(:current_year).order(:current_year).to_sql
     LeaveRecord.where("rec_year = (#{sub_query})
-                      and emp_id = :user_id
+                      and employee_id = :user_id
                       and leave_type_id = :leave_option
                       and days_left >= :days
                       and isactive = :active",
