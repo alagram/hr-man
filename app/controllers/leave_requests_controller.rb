@@ -1,6 +1,7 @@
 class LeaveRequestsController < ApplicationController
   def new
     @leave_request = LeaveRequest.new
+    @leave_records = current_user.leave_records
   end
 
   def create

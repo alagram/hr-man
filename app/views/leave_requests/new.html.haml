@@ -2,38 +2,57 @@
 
 = render 'shared/errors', object: @leave_request
 
-.col-md-6.jumbotron
-  .form-group.col-lg-6
-    %h3 Book Leave
-  = form_for(@leave_request) do |f|
-    .form-group.col-lg-12
-      = f.label :leave_type_id, "Leave Type"
-      = f.select :leave_type_id, options_for_leave_types, {prompt: 'Select Leave Type'}, class: "form-control"
-    .form-group.col-lg-12
-      = f.label :date_from, "Date From"
-      = f.text_field :date_from, class: "form-control", autocomplete: "off"
-      %br
-    .form-group.col-lg-6#leave-request-radio-full
-      %label.radio-inline
-        = f.radio_button :day_type, "full"
-        = f.label :day_type, "Full Day"
-    .form-group.col-lg-6#leave-request-radio-half
-      %label.radio-inline
-        = f.radio_button :day_type, "half"
-        = f.label :day_type, "Half Day"
+.row
+  .col-md-6.jumbotron
     .form-group.col-lg-6
-      = f.text_field :num_of_days, class: "form-control", autocomplete: "off", placeholder: "Number of Days"
-    .form-group.col-lg-6
-      %button.btn.btn-primary#get-end-date Get End Date
-    .form-group.col-lg-12
-      = f.label :relievers, "Relievers"
-      = f.select :relievers, list_colleagues, {}, multiple: true, class: "form-control"
-      %span.help-block Select maximum of 3 relievers.
-    .form-group.col-lg-12
-      = f.label :hand_over_notes, "Hand Over Notes"
-      = f.cktext_area :hand_over_notes, class: "form-control", rows: 8, :ckeditor => { :language => 'en' , :toolbar => 'mini'}, autocomplete: "off"
-    .form-group.col-lg-6
-      = f.label :evidence, "Upload Evidence"
-      = f.file_field :evidence, class: "form-control", autocomplete: "off"
-    .form-group.col-lg-12
-      %button.btn.btn-primary#save-leave Save
+      %h3 Book Leave
+    = form_for(@leave_request) do |f|
+      .form-group.col-lg-12
+        = f.label :leave_type_id, "Leave Type"
+        = f.select :leave_type_id, options_for_leave_types, {prompt: 'Select Leave Type'}, class: "form-control"
+      .form-group.col-lg-12
+        = f.label :date_from, "Date From"
+        = f.text_field :date_from, class: "form-control", autocomplete: "off"
+        %br
+      .form-group.col-lg-6#leave-request-radio-full
+        %label.radio-inline
+          = f.radio_button :day_type, "full"
+          = f.label :day_type, "Full Day"
+      .form-group.col-lg-6#leave-request-radio-half
+        %label.radio-inline
+          = f.radio_button :day_type, "half"
+          = f.label :day_type, "Half Day"
+      .form-group.col-lg-6
+        = f.text_field :num_of_days, class: "form-control", autocomplete: "off", placeholder: "Number of Days"
+      .form-group.col-lg-6
+        %button.btn.btn-primary#get-end-date Get End Date
+      .form-group.col-lg-12
+        = f.label :relievers, "Relievers"
+        = f.select :relievers, list_colleagues, {}, multiple: true, class: "form-control"
+        %span.help-block Select maximum of 3 relievers.
+      .form-group.col-lg-12
+        = f.label :hand_over_notes, "Hand Over Notes"
+        = f.cktext_area :hand_over_notes, class: "form-control", rows: 8, :ckeditor => { :language => 'en' , :toolbar => 'mini'}, autocomplete: "off"
+      .form-group.col-lg-6
+        = f.label :evidence, "Upload Evidence"
+        = f.file_field :evidence, class: "form-control", autocomplete: "off"
+      .form-group.col-lg-12
+        %button.btn.btn-primary#save-leave Book Leave
+  .col-md-6
+    .jumbotron
+      %table.table{:style => 'background: white'}
+        %tr
+          %th Annual Leave Days Left
+          %td= pluralize("#{@leave_records.where(leave_type_id: 5).first.days_left}", 'day')
+        %tr
+          %th Sick Leave Days Left
+          %td= pluralize("#{@leave_records.where(leave_type_id: 1).first.days_left}", 'day')
+        %tr
+          %th Compassionate Leave Days Left
+          %td= pluralize("#{@leave_records.where(leave_type_id: 4).first.days_left}", 'day')
+        %tr
+          %th Paternity Leave Days Left
+          %td= pluralize("#{@leave_records.where(leave_type_id: 3).first.days_left}", 'day')
+        %tr
+          %th Maternity Leave Days Left
+          %td= pluralize("#{@leave_records.where(leave_type_id: 2).first.days_left}", 'day')
