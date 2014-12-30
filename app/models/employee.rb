@@ -19,6 +19,7 @@ class Employee < ActiveRecord::Base
   belongs_to :marital
   belongs_to :type
   has_many :leave_requests
+  has_many :leave_records
 
   def self.search(search_term)
     return [] if search_term.blank?
