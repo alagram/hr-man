@@ -1,0 +1,4 @@
+<%= ajax_flash("#content-div") %>
+
+$("#leave_request_<%= @leave_request.id %>").remove();
+$("#leave_request_<%= @leave_request.id %>_status").html("<%= @leave_request.leave_status.name %>");

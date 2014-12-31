@@ -64,6 +64,20 @@ class EmployeesController < ApplicationController
     @leave_requests = LeaveRequest.select { |leave_request| leave_request if leave_request.employee.manager == current_user.manager }
   end
 
+  def book_leave
+    respond_to do |format|
+      format.js do
+        @leave_request = LeaveRequest.where(id: params[:leave_request], employee_id: params[:id]).first
+        reliever_ids = @leave_request.relievers.reject(&:empty?)
+        @relievers = Employee.where(id: reliever_ids).pluck(:email)
+        @leave_request.leave_status_id = 2
+        @leave_request.save
+        AppMailer.send_leave_booking_email(@leave_request, @relievers).deliver
+        flash.now[:success] = "Your leave is going through the approval process."
+      end
+    end
+  end
+
 
   private
 

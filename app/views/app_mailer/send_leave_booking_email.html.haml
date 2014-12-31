@@ -1,0 +1,28 @@
+!!!5
+%html(lang="en-US")
+  %head
+    %title= "New Leave Request"
+    %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    =stylesheet_link_tag 'email.css'
+  %body
+    .container
+      .row
+        %p= "#{@leave_request.employee} has booked leave with the following details:"
+
+        %table.table.table-bordered-table-hover
+          %thead
+            %tr
+              %th #
+              %th Start Date
+              %th End Date
+              %th Days
+              %th Request Type
+              %th Status
+          %tbody
+            %tr
+              %td 1
+              %td= @leave_request.date_from.strftime("%e-%b-%Y")
+              %td= @leave_request.date_to.strftime("%e-%b-%Y")
+              %td= "#{@leave_request.days_taken} - #{@leave_request.day_type.capitalize}"
+              %td= @leave_request.leave_type.name
+              %td= @leave_request.leave_status.name

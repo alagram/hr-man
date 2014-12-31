@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
 
     member do
+      post 'book_leave'
     end
 
     resources :next_of_kins, only: [:new, :create, :edit, :update]
