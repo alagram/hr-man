@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229103859) do
+ActiveRecord::Schema.define(version: 20141230223659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -211,9 +211,9 @@ ActiveRecord::Schema.define(version: 20141229103859) do
     t.datetime "date_booked"
     t.datetime "date_approved"
     t.text     "hand_over_notes"
-    t.integer  "leave_statuses_id"
+    t.integer  "leave_status_id"
     t.string   "evidence"
-    t.string   "relievers",         default: [], array: true
+    t.string   "relievers",       default: [], array: true
     t.string   "num_of_days"
   end
 
