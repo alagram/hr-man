@@ -36,14 +36,18 @@
                     %i.glyphicon.glyphicon-plus
                     Book Leave
                 %li
-                  %a{:href => "#"} My Leave History
+                  = link_to leave_history_path(current_user) do
+                    %i.glyphicon.glyphicon-th-list
+                    My Leave History
+                %li
+                  = link_to team_leave_history_path(current_user) do
+                    %i.glyphicon.glyphicon-th-list
+                    My Team's Leave History
                 %li
                   %a{:href => "#"} Report
                 - if super_user?
                   %li
                     %a{:href => "#"} Pending Requests
-                  %li
-                    %a{:href => "#"} Team History
           %ul.nav.navbar-nav.navbar-right
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

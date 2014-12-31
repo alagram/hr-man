@@ -7,6 +7,8 @@ class LeaveRequest < ActiveRecord::Base
   # has_many :relievers, class_name: "Employee", foreign_key: :employee_id
   validate :past_date
   validate :date_is_holiday
+  belongs_to :leave_type
+  belongs_to :leave_status
 
 
   def past_date

@@ -1,0 +1,25 @@
+%table.table.table-bordered.table-hover
+  %thead
+    %tr
+      %th #
+      %th Full Name
+      %th Start Date
+      %th Days
+      %th Request Type
+      %th Date Signed
+      %th Status
+      %th Action
+  %tbody
+    - @leave_requests.each_with_index do |leave_request, index|
+      %tr
+        %td= index + 1
+        %td= leave_request.employee
+        %td= leave_request.date_from.strftime("%e-%b-%Y")
+        %td= "#{leave_request.days_taken} - #{leave_request.day_type.capitalize}"
+        %td= leave_request.leave_type.name
+        %td= "#{Date.today}"
+        %td= leave_request.leave_status.try(:name)
+        - if leave_request.leave_status_id == 1
+          %td= link_to "Book Leave", "#", class: 'btn btn-primary btn-xs'
+        - else
+          %td
