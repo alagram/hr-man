@@ -7,13 +7,13 @@ Rails.application.routes.draw do
   get 'welcome', to: 'homes#welcome'
   get 'employees/:id/team_leave_history', to: 'employees#team_leave_history', as: 'team_leave_history'
   get 'leave_history', to: 'leave_requests#leave_history'
+  post 'book_leave', to: 'leave_requests#book_leave'
   resources :employees, except: :destroy do
     collection do
       get :search
     end
 
     member do
-      post 'book_leave'
       get 'view_leave_details'
     end
 

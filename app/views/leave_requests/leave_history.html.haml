@@ -56,7 +56,7 @@
             %i.glyphicon.glyphicon-info-sign
             View Details
           - if leave_request.leave_status_id == 1
-            = link_to book_leave_employee_path(current_user, leave_request: leave_request.id), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "leave_request_#{leave_request.id}" do
+            = link_to book_leave_path(leave_request: leave_request.id), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "leave_request_#{leave_request.id}" do
               %i.glyphicon.glyphicon-ok
               Book Leave
 
