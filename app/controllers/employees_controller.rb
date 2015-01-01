@@ -56,10 +56,6 @@ class EmployeesController < ApplicationController
     render json: @managers
   end
 
-  def leave_history
-    @leave_requests = current_user.leave_requests.order("date_from DESC")
-  end
-
   def team_leave_history
     @leave_requests = LeaveRequest.order("date_from DESC").select { |leave_request| leave_request if leave_request.employee.manager == current_user.manager }
 
