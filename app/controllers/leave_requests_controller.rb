@@ -40,6 +40,7 @@ class LeaveRequestsController < ApplicationController
         render :new
       end
     else
+      @leave_records = current_user.leave_records
       render :new
     end
   end
