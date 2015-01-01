@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     member do
       post 'book_leave'
+      get 'view_leave_details'
     end
 
     resources :next_of_kins, only: [:new, :create, :edit, :update]
