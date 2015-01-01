@@ -58,20 +58,6 @@ class EmployeesController < ApplicationController
 
   end
 
-  def view_leave_details
-    respond_to do |format|
-      format.js do
-        @leave_request = LeaveRequest.where(id: params[:leave_request], employee: current_user).first
-        if @leave_request
-          reliever_ids = @leave_request.relievers.reject(&:empty?)
-          @relievers = Employee.where(id: reliever_ids).map { |employee| [employee.first_last_name] }.join(", ")
-        else
-          flash.now[:danger] = "Something went wrong, please check your input and try again."
-        end
-      end
-    end
-  end
-
 
   private
 
