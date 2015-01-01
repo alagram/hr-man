@@ -112,6 +112,10 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def leave_history
+    @leave_requests = current_user.leave_requests.order("date_from DESC")
+  end
+
   private
 
   def leave_request_params
