@@ -7,6 +7,8 @@
   %body
     .container
       .row
+        %p= "Dear #{@leave_request.employee.manager.first_name},"
+
         %p= "#{@leave_request.employee} has booked leave with the following details:"
 
         %table.table.table-bordered-table-hover
@@ -26,3 +28,5 @@
               %td= "#{@leave_request.days_taken} - #{@leave_request.day_type.capitalize}"
               %td= @leave_request.leave_type.name
               %td= @leave_request.leave_status.name
+
+        %p Thank you.
