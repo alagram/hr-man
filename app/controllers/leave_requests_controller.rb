@@ -156,6 +156,10 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def pending_requests
+    @pending_requests = LeaveRequest.where(leave_status_id: 3).select { |leave_request| leave_request if leave_request.employee.manager_id == current_user.id }
+  end
+
   private
 
   def leave_request_params

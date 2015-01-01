@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'team_leave_history', to: 'leave_requests#team_leave_history'
   get 'leave_history', to: 'leave_requests#leave_history'
   post 'book_leave', to: 'leave_requests#book_leave'
+  get 'pending_requests', to: 'leave_requests#pending_requests'
 
   resources :employees, except: :destroy do
     collection do

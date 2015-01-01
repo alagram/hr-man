@@ -56,9 +56,6 @@ class EmployeesController < ApplicationController
     render json: @managers
   end
 
-  end
-
-
   private
 
   def employee_params

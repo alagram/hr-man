@@ -46,9 +46,9 @@
                     My Team's Leave History
                 - if current_user && super_user?
                   %li
-                    / = link_to pending_requests_path(current_user) do
-                    /   %i.glyphicon.glyphicon-question-sign
-                    /   Pending Requests
+                    = link_to pending_requests_path do
+                      %i.glyphicon.glyphicon-question-sign
+                      Pending Requests
                 %li
                   %a{:href => "#"} Report
           %ul.nav.navbar-nav.navbar-right
