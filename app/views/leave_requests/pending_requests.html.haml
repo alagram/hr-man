@@ -22,12 +22,12 @@
         %td= leave_request.date_to.strftime("%e-%b-%Y")
         %td= "#{leave_request.days_taken} - #{leave_request.day_type.capitalize}"
         %td= leave_request.leave_type.name
-        %td{id: "leave_request_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
+        %td{id: "approve_leave_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
         %td
           = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}" do
             %i.glyphicon.glyphicon-info-sign
             View Details
-          = link_to "#", class: 'btn btn-success btn-xs' do
+          = link_to approve_leave_path(leave_request: leave_request), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "approve_leave_#{leave_request.id}" do
             %i.glyphicon.glyphicon-ok
             Approve
           = link_to "#", class: 'btn btn-danger btn-xs' do

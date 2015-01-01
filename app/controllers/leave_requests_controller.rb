@@ -161,6 +161,27 @@ class LeaveRequestsController < ApplicationController
     @pending_requests = LeaveRequest.where(leave_status_id: 3).select { |leave_request| leave_request if leave_request.employee.manager_id == current_user.id }
   end
 
+  def approve_leave
+    respond_to do |format|
+      format.js do
+        @leave_request = LeaveRequest.find(params[:leave_request])
+
+        if @leave_request
+          reliever_ids = @leave_request.relievers.reject(&:empty?)
+          @relievers = Employee.where(id: reliever_ids).map { |employee| [employee.first_last_name] }.join(", ")
+          @leave_request.leave_status_id = 4
+          @leave_request.approver = current_user.first_last_name
+          @leave_request.date_approved = Date.today
+          @leave_request.save if @leave_request.employee.manager == current_user
+          AppMailer.send_leave_approved_email(@leave_request, @relievers).deliver
+          flash.now[:success] = "Leave Request successfully approved."
+        else
+          flash.now[:danger] = "Something went wrong, please check your input and try again."
+        end
+      end
+    end
+  end
+
   private
 
   def leave_request_params

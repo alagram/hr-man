@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230223659) do
+ActiveRecord::Schema.define(version: 20150101202859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,7 +205,6 @@ ActiveRecord::Schema.define(version: 20141230223659) do
     t.datetime "date_to"
     t.float    "days_taken"
     t.float    "days_left"
-    t.integer  "approver"
     t.string   "day_type"
     t.integer  "leave_type_id"
     t.datetime "date_booked"
@@ -215,6 +214,7 @@ ActiveRecord::Schema.define(version: 20141230223659) do
     t.string   "evidence"
     t.string   "relievers",       default: [], array: true
     t.string   "num_of_days"
+    t.string   "approver"
   end
 
   create_table "leave_statuses", force: true do |t|
