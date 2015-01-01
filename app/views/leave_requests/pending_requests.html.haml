@@ -1,7 +1,7 @@
 - title "Pending Requests"
 .form-group.col-lg-6
   %h3 Pending Requests
-= render 'leave_details'
+= render 'show_leave_details'
 %table.table.table-bordered.table-hover
   %thead
     %tr
@@ -12,7 +12,7 @@
       %th Days
       %th Request Type
       %th Status
-      %th{style: "width: 210px;"} Action
+      %th{style: "width: 265px;"} Action
   %tbody
     - @pending_requests.each_with_index do |leave_request, index|
       %tr
@@ -30,4 +30,7 @@
           = link_to "#", class: 'btn btn-success btn-xs' do
             %i.glyphicon.glyphicon-ok
             Approve
+          = link_to "#", class: 'btn btn-danger btn-xs' do
+            %i.glyphicon.glyphicon-remove
+            Cancel
 
