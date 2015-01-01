@@ -134,6 +134,14 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def team_leave_history
+    @leave_requests = LeaveRequest.order("date_from DESC").select { |leave_request| leave_request if leave_request.employee.manager == current_user.manager }
+
+    if current_user && super_user?
+      @leave_requests = LeaveRequest.order("date_from DESC").select { |leave_request| leave_request if leave_request.employee.manager_id == current_user.id }
+    end
+  end
+
   private
 
   def leave_request_params

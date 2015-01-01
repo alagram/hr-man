@@ -41,14 +41,16 @@
                     %i.glyphicon.glyphicon-th-list
                     My Leave History
                 %li
-                  = link_to team_leave_history_path(current_user) do
+                  = link_to team_leave_history_path do
                     %i.glyphicon.glyphicon-th-list
                     My Team's Leave History
+                - if current_user && super_user?
+                  %li
+                    / = link_to pending_requests_path(current_user) do
+                    /   %i.glyphicon.glyphicon-question-sign
+                    /   Pending Requests
                 %li
                   %a{:href => "#"} Report
-                - if super_user?
-                  %li
-                    %a{:href => "#"} Pending Requests
           %ul.nav.navbar-nav.navbar-right
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}

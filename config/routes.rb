@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'sign_in', to: 'sessions#new'
   get 'sign_out', to: 'sessions#destroy'
   get 'welcome', to: 'homes#welcome'
-  get 'employees/:id/team_leave_history', to: 'employees#team_leave_history', as: 'team_leave_history'
+  get 'team_leave_history', to: 'leave_requests#team_leave_history'
   get 'leave_history', to: 'leave_requests#leave_history'
   post 'book_leave', to: 'leave_requests#book_leave'
   resources :employees, except: :destroy do
