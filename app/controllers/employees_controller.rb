@@ -68,12 +68,30 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       format.js do
         @leave_request = LeaveRequest.where(id: params[:leave_request], employee_id: params[:id]).first
-        reliever_ids = @leave_request.relievers.reject(&:empty?)
-        @relievers = Employee.where(id: reliever_ids).pluck(:email)
-        @leave_request.leave_status_id = 2
-        @leave_request.save
-        AppMailer.send_leave_booking_email(@leave_request, @relievers).deliver
-        flash.now[:success] = "Your leave is going through the approval process."
+        if @leave_request
+          reliever_ids = @leave_request.relievers.reject(&:empty?)
+          @relievers = Employee.where(id: reliever_ids).pluck(:email)
+          @leave_request.leave_status_id = 3
+          @leave_request.save
+          AppMailer.send_leave_booking_email(@leave_request, @relievers).deliver
+          flash.now[:success] = "Your leave is going through the approval process."
+        else
+          flash.now[:danger] = "Something went wrong, please check your input and try again."
+        end
+      end
+    end
+  end
+
+  def view_leave_details
+    respond_to do |format|
+      format.js do
+        @leave_request = LeaveRequest.where(id: params[:leave_request], employee: current_user).first
+        if @leave_request
+          reliever_ids = @leave_request.relievers.reject(&:empty?)
+          @relievers = Employee.where(id: reliever_ids).map { |employee| [employee.first_last_name] }.join(", ")
+        else
+          flash.now[:danger] = "Something went wrong, please check your input and try again."
+        end
       end
     end
   end

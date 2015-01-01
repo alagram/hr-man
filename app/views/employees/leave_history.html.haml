@@ -1,6 +1,37 @@
 - title "My Leave History"
 .form-group.col-lg-6
   %h3 Leave History
+.row#leave_display_alert{style: "display: none;"}
+  .alert.alert-info.col-md-10.col-md-offset-1
+    %a.close#display_leave_close ×
+    .form-group.col-md-8
+      %h3#employee_name
+    .col-md-8
+      %table.table
+        %tr
+          %th Request Type
+          %td#request_type
+        %tr
+          %th Day Type
+          %td#day_type
+        %tr
+          %th Status
+          %td#status
+        %tr
+          %th Request Date
+          %td#request_date
+        %tr
+          %th Start Date
+          %td#start_date
+        %tr
+          %th End Date
+          %td#end_date
+        %tr
+          %th Number Of Days
+          %td#number_of_days
+        %tr
+          %th Reliever(s)
+          %td#reliever
 %table.table.table-bordered.table-hover
   %thead
     %tr
@@ -10,7 +41,7 @@
       %th Days
       %th Request Type
       %th Status
-      %th{style: "width: 315px;"} Action
+      %th{style: "width: 210px;"} Action
   %tbody
     - @leave_requests.each_with_index do |leave_request, index|
       %tr
@@ -21,14 +52,11 @@
         %td= leave_request.leave_type.name
         %td{id: "leave_request_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
         %td
-          = link_to "#", class: 'btn btn-primary btn-xs' do
+          = link_to view_leave_details_employee_path(current_user, leave_request: leave_request.id), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}" do
             %i.glyphicon.glyphicon-info-sign
             View Details
           - if leave_request.leave_status_id == 1
             = link_to book_leave_employee_path(current_user, leave_request: leave_request.id), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "leave_request_#{leave_request.id}" do
               %i.glyphicon.glyphicon-ok
               Book Leave
-          = link_to "#", class: 'btn btn-danger btn-xs' do
-            %i.glyphicon.glyphicon-remove
-            Cancel Leave
 
