@@ -1,36 +1,39 @@
 - title "Pending Requests"
-.form-group.col-lg-6
-  %h3 Pending Requests
+
 = render 'show_leave_details'
-%table.table.table-bordered.table-hover
-  %thead
-    %tr
-      %th #
-      %th Full Name
-      %th Start Date
-      %th End Date
-      %th Days
-      %th Request Type
-      %th Status
-      %th{style: "width: 265px;"} Action
-  %tbody
-    - @pending_requests.each_with_index do |leave_request, index|
-      %tr{id: "request_#{leave_request.id}_tr"}
-        %td= index + 1
-        %td= leave_request.employee
-        %td= leave_request.date_from.strftime("%e-%b-%Y")
-        %td= leave_request.date_to.strftime("%e-%b-%Y")
-        %td= "#{leave_request.days_taken} - #{leave_request.day_type.capitalize}"
-        %td= leave_request.leave_type.name
-        %td{id: "approve_leave_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
-        %td
-          = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}" do
-            %i.glyphicon.glyphicon-info-sign
-            View Details
-          = link_to approve_leave_path(leave_request: leave_request), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "approve_leave_#{leave_request.id}" do
-            %i.glyphicon.glyphicon-ok
-            Approve
-          = link_to "#", class: 'btn btn-danger btn-xs' do
-            %i.glyphicon.glyphicon-remove
-            Cancel
+
+.jumbotron
+  .form-group.col-lg-6
+    %h3 Pending Requests
+  %table.table.table-bordered.table-striped{:style => 'background: white'}
+    %thead
+      %tr
+        %th #
+        %th Full Name
+        %th Start Date
+        %th End Date
+        %th Days
+        %th Request Type
+        %th Status
+        %th{style: "width: 265px;"} Action
+    %tbody
+      - @pending_requests.each_with_index do |leave_request, index|
+        %tr{id: "request_#{leave_request.id}_tr"}
+          %td= index + 1
+          %td= leave_request.employee
+          %td= leave_request.date_from.strftime("%e-%b-%Y")
+          %td= leave_request.date_to.strftime("%e-%b-%Y")
+          %td= "#{leave_request.days_taken} - #{leave_request.day_type.capitalize}"
+          %td= leave_request.leave_type.name
+          %td{id: "approve_leave_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
+          %td
+            = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}" do
+              %i.glyphicon.glyphicon-info-sign
+              View Details
+            = link_to approve_leave_path(leave_request: leave_request), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "approve_leave_#{leave_request.id}" do
+              %i.glyphicon.glyphicon-ok
+              Approve
+            = link_to "#", class: 'btn btn-danger btn-xs' do
+              %i.glyphicon.glyphicon-remove
+              Reject
 
