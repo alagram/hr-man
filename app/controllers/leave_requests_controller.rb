@@ -168,7 +168,7 @@ class LeaveRequestsController < ApplicationController
 
         if @leave_request
           reliever_ids = @leave_request.relievers.reject(&:empty?)
-          @relievers = Employee.where(id: reliever_ids).map { |employee| [employee.first_last_name] }.join(", ")
+          @relievers = Employee.where(id: reliever_ids).pluck(:email)
           @leave_request.leave_status_id = 4
           @leave_request.approver = current_user.first_last_name
           @leave_request.date_approved = Date.today
