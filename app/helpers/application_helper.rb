@@ -22,4 +22,26 @@ module ApplicationHelper
       content_for?(:meta_description) ? content_for(:meta_description) : APP_CONFIG['meta_description']
     end
   end
+
+  def ajax_flash(div_id)
+    response = ""
+    flash_div = ""
+
+    flash.each do |name, msg|
+      if msg.is_a?(String)
+        flash_div = "<div class=\"alert alert-#{name == 'success' ? 'success' : 'danger'} ajax_flash\"><a class=\"close\" data-dismiss=\"alert\">&#215;</a> <div id=\"flash_#{name == 'success' ? 'success' : 'danger'}\">#{h(msg)}</div> </div>"
+      end
+    end
+    response = "$('.ajax_flash').remove();$('#{div_id}').prepend('#{flash_div}');"
+    response.html_safe
+  end
+
+  def options_for_leave_types
+    sub_select = EndOfYear.select(:current_year).where(isactive: true)
+    LeaveRecord.joins(:leave_type).where(rec_year: sub_select, employee_id: current_user.id).distinct.order('name ASC').pluck(:name, :leave_type_id)
+  end
+
+  def list_colleagues
+    Employee.all.map {|employee| [employee.first_last_name, employee.id] if current_user.manager == employee.manager}.compact.delete_if {|emp| emp.first == "#{current_user.first_last_name}"}
+  end
 end

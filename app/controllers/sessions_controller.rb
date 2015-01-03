@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def new
-    redirect_to employees_path if current_user
+    redirect_to employees_path and return if super_user?
+    redirect_to welcome_path if current_user
   end
 
   def create
@@ -8,8 +9,14 @@ class SessionsController < ApplicationController
 
     if employee && employee.authenticate(params[:password])
       session[:emp_id] = employee.id
-      redirect_to employees_path
-      flash[:success] = "You have successfully signed in."
+      if super_user?
+        redirect_to employees_path
+        flash[:success] = "You have successfully signed in."
+        return
+      else
+        redirect_to welcome_path
+        flash[:success] = "You have successfully signed in."
+      end
     else
       flash[:danger] = "Invalid credentials."
       redirect_to sign_in_path

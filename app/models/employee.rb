@@ -15,6 +15,11 @@ class Employee < ActiveRecord::Base
   belongs_to :job_title
   belongs_to :nationality
   belongs_to :ethnicity, class_name: "Race", foreign_key: "race_id"
+  belongs_to :department
+  belongs_to :marital
+  belongs_to :type
+  has_many :leave_requests
+  has_many :leave_records
 
   def self.search(search_term)
     return [] if search_term.blank?
@@ -46,5 +51,9 @@ class Employee < ActiveRecord::Base
   def manager_name=(name)
     names = name.split(" ")
     self.manager = Employee.find_by_first_name_and_last_name(names.first, names.last) if name.present?
+  end
+
+  def first_last_name
+    "#{first_name} #{last_name}"
   end
 end

@@ -11,3 +11,7 @@ Fabricator(:employee) do
   manager_id { (1..10).to_a.sample }
   gender
 end
+
+Fabricator(:super_user, from: :employee) do
+  admin true
+end

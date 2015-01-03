@@ -5,39 +5,93 @@
     .jumbotron
       .navbar.navbar-default
         .container-fluid
-          .navbar-header.navbar-brand
+
+          %p.navbar-text.navbar-left
             = "#{@employee}"
             = "(#{@employee.emp_id})" if @employee.emp_id
-          %p.navbar-text.navbar-right
-            = link_to "Edit", edit_employee_path(@employee), class: 'navbar-link'
-      %table.table.ttable-bordered{:style => 'background: white'}
-        %thead
-          %tr
-            %th= "#"
-            %th= "#"
-            %th= "#"
+            %br
+            %span{:style => 'font-size: 13px'}= @employee.type.name
+            %br
+            %span{:style => 'font-size: 13px'}= @employee.job_title.name
+          - if current_user && super_user?
+            %p.navbar-text.navbar-right
+              = link_to edit_employee_path(@employee), title: "Edit #{@employee}", :style => 'color: white', class: 'navbar-link btn btn-primary btn-xs' do
+                %i.glyphicon.glyphicon-edit
+                Edit Profile
+      %table.table{:style => 'background: white'}
         %tbody
           %tr
-            %td{:rowspan=> '2'}
-            %td.text-muted Job Title
-            %td.text-muted Line Manager
+            %td
+              %span.text-muted
+                Social Security Number
+              %br
+              = @employee.ssn
+            %td
+              %span.text-muted
+                Line Manager
+              %br
+              = @employee.manager
           %tr
-            %td= @employee.job_title.name
-            %td= @employee.manager
+            %td
+              %span.text-muted
+                Team
+              %br
+              = @employee.user_group.name
+            %td
+              %span.text-muted
+                Gender
+              %br
+              = @employee.gender.name
           %tr
-            %td{:rowspan=> '2'}
-            %td.text-muted Team
-            %td.text-muted Location
+            %td
+              %span.text-muted
+                Ethnicity
+              %br
+              = @employee.ethnicity.name
+            %td
+              %span.text-muted
+                Nationality
+              %br
+              = @employee.nationality.name
           %tr
-            %td= @employee.user_group.name
-            %td= @employee
+            %td
+              %span.text-muted
+                Department
+              %br
+              = @employee.department.name
+            %td
+              %span.text-muted
+                Date of Birth
+              %br
+              = @employee.dob
           %tr
-            %td{:rowspan=> '2'}
-            %td.text-muted Ethnicity
-            %td.text-muted Nationality
+            %td
+              %span.text-muted
+                Marital Status
+              %br
+              = @employee.marital.name
+            %td
+              %span.text-muted
+                Email
+              %br
+              = mail_to @employee.email, :style => 'text-decoration: none; color: #333' do
+                = @employee.email
           %tr
-            %td= @employee.ethnicity.name
-            %td= @employee.nationality.name
+            %td
+              %span.text-muted
+                Office Phone
+              %br
+              = @employee.officephone
+            %td
+              %span.text-muted
+                Cell Phone
+              %br
+              = @employee.cellphone
+
+
+
+      .highlight.text-center
+        = "Added: #{@employee.created_at.strftime("%d.%m.%Y")} Last Modified: #{@employee.updated_at.strftime("%d.%m.%Y %H:%M%P")}"
 
   %div.col-md-4
     .jumbotron

@@ -1,0 +1,5 @@
+<%= ajax_flash("#content-div") %>
+<% if @leave_request %>
+  $("#approve_leave_<%= @leave_request.id %>").remove();
+  $("#request_<%= @leave_request.id %>_tr").remove();
+<% end %>

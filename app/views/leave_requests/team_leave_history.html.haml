@@ -1,0 +1,26 @@
+- title "My Team Leave History"
+.jumbotron
+  .form-group.col-lg-6
+    %h3 My Team's Leave History
+  %table.table.table-bordered.table-striped{:style => 'background: white'}
+    %thead
+      %tr
+        %th #
+        %th Full Name
+        %th Start Date
+        %th End Date
+        %th Days
+        %th Request Type
+        %th Date Signed
+        %th Status
+    %tbody
+      - @leave_requests.each_with_index do |leave_request, index|
+        %tr
+          %td= index + 1
+          %td= leave_request.employee
+          %td= leave_request.date_from.strftime("%e-%b-%Y")
+          %td= leave_request.date_to.strftime("%e-%b-%Y")
+          %td= "#{leave_request.days_taken} - #{leave_request.day_type.capitalize}"
+          %td= leave_request.leave_type.name
+          %td= "#{Date.today}"
+          %td= leave_request.leave_status.try(:name)

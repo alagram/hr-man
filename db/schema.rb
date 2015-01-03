@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117132558) do
+ActiveRecord::Schema.define(version: 20150101202859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20141117132558) do
     t.string   "dob"
     t.integer  "gender_id"
     t.string   "emp_id"
-    t.integer  "dept_id"
+    t.integer  "department_id"
     t.integer  "job_title_id"
     t.integer  "type_id"
     t.string   "ssn"
@@ -108,8 +108,6 @@ ActiveRecord::Schema.define(version: 20141117132558) do
     t.string   "password_digest"
     t.integer  "user_group_id"
     t.integer  "numlogins"
-    t.datetime "dateadded"
-    t.datetime "dateupdated"
     t.integer  "user_id"
     t.integer  "user_ip"
     t.integer  "manager_id"
@@ -121,6 +119,14 @@ ActiveRecord::Schema.define(version: 20141117132558) do
     t.datetime "start_date"
     t.integer  "race_id"
     t.string   "employee_image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "admin",           default: false
+  end
+
+  create_table "end_of_years", force: true do |t|
+    t.string  "current_year"
+    t.boolean "isactive"
   end
 
   create_table "genders", force: true do |t|
@@ -129,6 +135,14 @@ ActiveRecord::Schema.define(version: 20141117132558) do
     t.datetime "updated_at"
     t.boolean  "isactive"
     t.integer  "company_id"
+  end
+
+  create_table "holidays", force: true do |t|
+    t.string   "name"
+    t.boolean  "isactive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "hol_date"
   end
 
   create_table "job_titles", force: true do |t|
@@ -170,35 +184,64 @@ ActiveRecord::Schema.define(version: 20141117132558) do
     t.boolean  "isactive"
   end
 
-  create_table "leave_requests", force: true do |t|
-    t.integer  "emp_id"
-    t.string   "balance_year"
-    t.string   "taken"
-    t.string   "left"
-    t.string   "approver"
-    t.text     "handovernotes"
-    t.string   "reliever1"
-    t.string   "reliever2"
-    t.integer  "leavetype"
-    t.string   "daytype"
-    t.datetime "datefrom"
-    t.datetime "dateto"
-    t.datetime "datebooked"
-    t.datetime "dateapproved"
-    t.boolean  "status"
+  create_table "leave_records", force: true do |t|
+    t.integer  "leave_type_id"
+    t.string   "rec_year"
+    t.integer  "employee_id"
+    t.integer  "carried_over"
+    t.boolean  "archive"
     t.boolean  "isactive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "days_left"
+    t.float    "days_taken"
+  end
+
+  create_table "leave_requests", force: true do |t|
+    t.integer  "employee_id"
+    t.boolean  "isactive"
+    t.integer  "leave_year"
+    t.datetime "date_from"
+    t.datetime "date_to"
+    t.float    "days_taken"
+    t.float    "days_left"
+    t.string   "day_type"
+    t.integer  "leave_type_id"
+    t.datetime "date_booked"
+    t.datetime "date_approved"
+    t.text     "hand_over_notes"
+    t.integer  "leave_status_id"
+    t.string   "evidence"
+    t.string   "relievers",       default: [], array: true
+    t.string   "num_of_days"
+    t.string   "approver"
+  end
+
+  create_table "leave_statuses", force: true do |t|
+    t.string   "name"
+    t.boolean  "isactive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "leave_types", force: true do |t|
     t.string   "name"
     t.integer  "company_id"
-    t.float    "dayspermonth"
-    t.integer  "emptype"
-    t.datetime "dateadded"
-    t.datetime "dateupdated"
+    t.integer  "emp_type"
     t.integer  "user_id"
     t.string   "user_ip"
     t.boolean  "isactive"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "gender_id"
+    t.string   "option"
+    t.integer  "entitlement"
+    t.integer  "max_days"
+    t.boolean  "carry_forward"
+    t.string   "bookable_by"
+    t.integer  "service_period_limitation"
+    t.boolean  "weekend",                   default: false
+    t.float    "days_per_month",            default: 0.0
   end
 
   create_table "maritals", force: true do |t|

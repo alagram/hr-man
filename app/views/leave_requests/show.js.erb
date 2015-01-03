@@ -1,0 +1,14 @@
+<%= ajax_flash("#content-div") %>
+
+<% if @leave_request %>
+  $("#employee_name").html("<%= @leave_request.employee %>");
+  $('#request_type').html("<%= @leave_request.leave_type.name %>");
+  $('#day_type').html("<%= @leave_request.day_type.capitalize %>");
+  $('#status').html("<%= @leave_request.leave_status.name %>");
+  $('#request_date').html("<%= @leave_request.date_booked.strftime('%e-%b-%Y') %>");
+  $('#start_date').html("<%= @leave_request.date_from.strftime('%e-%b-%Y') %>");
+  $('#end_date').html("<%= @leave_request.date_to.strftime('%e-%b-%Y') %>");
+  $('#number_of_days').html("<%= @leave_request.num_of_days %>");
+  $('#reliever').html("<%= @relievers %>");
+  $('#leave_display_alert').show();
+<% end %>

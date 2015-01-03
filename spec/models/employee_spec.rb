@@ -13,6 +13,9 @@ RSpec.describe Employee, :type => :model do
  it { should validate_uniqueness_of(:emp_id) }
  it { should belong_to(:job_title) }
  it { should belong_to(:nationality) }
+ it { should belong_to(:department) }
+ it { should belong_to(:marital) }
+ it { should belong_to(:type) }
 
   describe "search" do
 
