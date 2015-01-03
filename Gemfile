@@ -39,6 +39,7 @@ gem 'chosen-rails'
 gem 'letter_opener_web', '~> 1.2.0', :group => :development
 gem 'nokogiri'
 gem 'premailer-rails'
+gem "font-awesome-rails"
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development do

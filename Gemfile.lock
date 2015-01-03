@@ -119,6 +119,8 @@ GEM
     fog-xml (0.1.1)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     fssm (0.2.10)
     haml (4.0.5)
@@ -287,6 +289,7 @@ DEPENDENCIES
   fabrication
   faker
   fog
+  font-awesome-rails
   haml-rails
   jbuilder (~> 2.0)
   jquery-datatables-rails (~> 2.2.3)
