@@ -33,7 +33,7 @@
             = link_to approve_leave_path(leave_request: leave_request), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "approve_leave_#{leave_request.id}" do
               %i.glyphicon.glyphicon-ok
               Approve
-            = link_to "#", class: 'btn btn-danger btn-xs' do
+            = link_to reject_leave_path(leave_request: leave_request), class: 'btn btn-danger btn-xs', method: :delete, remote: true, id: "reject_leave_#{leave_request.id}" do
               %i.glyphicon.glyphicon-remove
               Reject
 

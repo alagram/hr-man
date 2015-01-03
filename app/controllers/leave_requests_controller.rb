@@ -164,7 +164,7 @@ class LeaveRequestsController < ApplicationController
   def approve_leave
     respond_to do |format|
       format.js do
-        @leave_request = LeaveRequest.find(params[:leave_request])
+        find_leave_request
 
         if @leave_request
           reliever_ids = @leave_request.relievers.reject(&:empty?)
@@ -172,17 +172,48 @@ class LeaveRequestsController < ApplicationController
           @leave_request.leave_status_id = 4
           @leave_request.approver = current_user.first_last_name
           @leave_request.date_approved = Date.today
-          @leave_request.save if @leave_request.employee.manager == current_user
-          AppMailer.send_leave_approved_email(@leave_request, @relievers).deliver
-          flash.now[:success] = "Leave Request successfully approved."
-        else
-          flash.now[:danger] = "Something went wrong, please check your input and try again."
+          if @leave_request.employee.manager == current_user
+            @leave_request.save
+            AppMailer.send_leave_approved_email(@leave_request, @relievers).deliver
+            flash.now[:success] = "Leave Request successfully approved."
+          else
+            flash.now[:danger] = "Something went wrong, please check your input and try again."
+          end
+        end
+      end
+    end
+  end
+
+  def reject_leave
+    respond_to do |format|
+      format.js do
+        find_leave_request
+
+        if @leave_request
+          reliever_ids = @leave_request.relievers.reject(&:empty?)
+          @relievers = Employee.where(id: reliever_ids).pluck(:email)
+          @leave_record = LeaveRecord.where(leave_type_id: @leave_request.leave_type_id, employee_id: @leave_request.employee_id).first
+          @leave_record.update(days_left: "#{@leave_record.days_left + @leave_request.days_taken}", days_taken: "#{@leave_record.days_taken - @leave_request.days_taken}")
+          @leave_request.leave_status_id = 5
+          if @leave_request.employee.manager == current_user
+            @leave_request.save
+            AppMailer.send_leave_rejected_email(@leave_request, @relievers).deliver
+            flash.now[:success] = "Leave Request successfully rejected."
+          else
+            flash.now[:danger] = "Something went wrong, please check your input and try again."
+          end
         end
       end
     end
   end
 
   private
+
+  def find_leave_request
+    @leave_request = LeaveRequest.find(params[:leave_request])
+  rescue ActiveRecord::RecordNotFound
+    flash.now[:danger] = "Something went wrong, please check your input and try again."
+  end
 
   def leave_request_params
     params.require(:leave_request).permit(:leave_type_id, :date_from,

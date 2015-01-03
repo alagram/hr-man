@@ -8,4 +8,9 @@ class AppMailer < ActionMailer::Base
     @leave_request = leave_request
     mail(subject: "Leave Approved", from: "info@hrapp.com", to: leave_request.employee.email, cc: relievers)
   end
+
+  def send_leave_rejected_email(leave_request, relievers)
+    @leave_request = leave_request
+    mail(subject: "Leave Rejected", from: "info@hrapp.com", to: leave_request.employee.email, cc: relievers)
+  end
 end
