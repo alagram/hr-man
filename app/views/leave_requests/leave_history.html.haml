@@ -1,5 +1,4 @@
 - title "My Leave History"
-= render 'show_leave_details'
 
 .jumbotron
   .form-group.col-lg-6
@@ -24,9 +23,10 @@
           %td= leave_request.leave_type.name
           %td{id: "leave_request_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
           %td
-            = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}" do
+            = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}", data: {toggle: "modal", target: "#ajax-modal"} do
               %i.glyphicon.glyphicon-info-sign
               View Details
+            = render 'modal'
             - if leave_request.leave_status_id == 1
               = link_to book_leave_path(leave_request: leave_request.id), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "leave_request_#{leave_request.id}" do
                 %i.glyphicon.glyphicon-ok
