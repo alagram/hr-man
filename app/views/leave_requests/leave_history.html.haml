@@ -1,9 +1,10 @@
 - title "My Leave History"
 
 .jumbotron
-  .form-group.col-lg-6
-    %h3 Leave History
-  %table.table.table-bordered.table-striped{:style => 'background: white'}
+  .row
+    .form-group.col-lg-6
+      %h3 Leave History
+  %table.table.table-bordered.table-striped#leave_history_table{:style => 'background: white'}
     %thead
       %tr
         %th #
@@ -23,7 +24,7 @@
           %td= leave_request.leave_type.name
           %td{id: "leave_request_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
           %td
-            = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}", data: {toggle: "modal", target: "#ajax-modal"} do
+            = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}", data: {toggle: "modal", target: "#leave_request_#{leave_request.id}_modal"} do
               %i.glyphicon.glyphicon-info-sign
               View Details
             = render 'modal'
