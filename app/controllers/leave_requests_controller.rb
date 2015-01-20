@@ -207,6 +207,22 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def calendar_view
+    respond_to do |format|
+      format.html
+      format.js do
+        @date = Date.today
+        @month_selected = params[:month_selected]
+        @month = Date.parse("01-#{@month_selected}-#{Time.now.year}")
+        @month_start = @month.beginning_of_month
+        @month_end = @month.end_of_month
+        @date_range = Date.parse("#{Time.now.year}-#{@month_selected}-1").all_month
+        @leave_requests = LeaveRequest.where("date_to >= :month_start and date_from <= :month_end",
+                                             month_end: "#{@month_end}", month_start: "#{@month_start}")
+      end
+    end
+  end
+
   private
 
   def find_leave_request

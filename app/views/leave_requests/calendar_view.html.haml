@@ -1,0 +1,9 @@
+- title "Calendar View"
+
+.jumbotron
+  .row
+    .form-group.col-lg-6
+      %h3 Calendar View
+      %br
+      = select_month(0, { prompt: 'Choose month' }, { class: "form-control" })
+  #calendar_view
