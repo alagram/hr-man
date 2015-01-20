@@ -1,3 +1,5 @@
+<%= ajax_flash("#content-div") %>
+
 <% if @leave_request %>
   $("#leave_history_modal").modal('hide');
   $("#employee_name").html("<%= @leave_request.employee %>")
