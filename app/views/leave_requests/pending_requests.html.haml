@@ -1,9 +1,10 @@
 - title "Pending Requests"
 
 .jumbotron
-  .form-group.col-lg-6
-    %h3 Pending Requests
-  %table.table.table-bordered.table-striped{:style => 'background: white'}
+  .row
+    .form-group.col-lg-6
+      %h3 Pending Requests
+  %table.table.table-bordered.table-striped#pending_leave_requests{:style => 'background: white'}
     %thead
       %tr
         %th #
