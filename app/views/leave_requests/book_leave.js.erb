@@ -1,5 +1,8 @@
 <%= ajax_flash("#content-div") %>
+
+$("#confirm_modal").modal('hide');
+
 <% if @leave_request %>
-  $("#leave_request_<%= @leave_request.id %>").remove();
+  $("#book_leave_<%= @leave_request.id %>").remove();
   $("#leave_request_<%= @leave_request.id %>_status").html("<%= @leave_request.leave_status.name %>");
 <% end %>
