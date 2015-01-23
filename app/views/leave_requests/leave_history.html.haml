@@ -1,5 +1,7 @@
 - title "My Leave History"
 
+= render 'leave_details_modal'
+= render 'book_leave_confirm_modal'
 .jumbotron
   .row
     .form-group.col-lg-6
@@ -27,10 +29,8 @@
             = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}", data: {toggle: "modal", target: "#leave_request_#{leave_request.id}_modal"} do
               %i.glyphicon.glyphicon-info-sign
               View Details
-            = render 'modal'
             - if leave_request.leave_status_id == 1
-              %button{class: "btn btn-success btn-xs", value: "#{leave_request.id}", id: "book_leave_#{leave_request.id}"}
+              %button{class: "btn btn-success btn-xs book_leave_btn", value: "#{leave_request.id}", id: "book_leave_#{leave_request.id}"}
                 %i.glyphicon.glyphicon-ok
                 Book Leave
-              = render 'confirm_modal'
 

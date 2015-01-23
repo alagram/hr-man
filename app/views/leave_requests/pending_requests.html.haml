@@ -1,5 +1,8 @@
 - title "Pending Requests"
 
+= render 'approve_leave_modal'
+= render 'leave_details_modal'
+= render 'reject_leave_modal'
 .jumbotron
   .row
     .form-group.col-lg-6
@@ -29,11 +32,10 @@
             = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}" do
               %i.glyphicon.glyphicon-info-sign
               View Details
-            = render 'modal'
-            = link_to approve_leave_path(leave_request: leave_request), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "approve_leave_#{leave_request.id}" do
+            %button{class: "btn btn-success btn-xs approve_leave_btn", value: "#{leave_request.id}", id: "approve_leave_#{leave_request.id}"}
               %i.glyphicon.glyphicon-ok
               Approve
-            = link_to reject_leave_path(leave_request: leave_request), class: 'btn btn-danger btn-xs', method: :delete, remote: true, id: "reject_leave_#{leave_request.id}" do
+            %button{class: "btn btn-danger btn-xs reject_leave_btn", value: "#{leave_request.id}", id: "reject_leave_#{leave_request.id}"}
               %i.glyphicon.glyphicon-remove
               Reject
 

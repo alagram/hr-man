@@ -1,12 +1,12 @@
-.modal.fade#confirm_modal
+.modal.fade#approve_leave_modal
   .modal-dialog
     .modal-content
       .modal-header{style: "border-bottom: 0px;"}
-        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+        %a.close{"aria-label" => "Close", "data-dismiss" => "modal"}
           %span{"aria-hidden" => "true"} &#215;
         %h4.modal-title
       .modal-body
         %p Are you sure?
       .modal-footer
         %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} No
-        %button.btn.btn-primary#leave_approval_yes{:type => "button"} Yes
+        %button.btn.btn-primary#approve_leave_yes{:type => "button"} Yes

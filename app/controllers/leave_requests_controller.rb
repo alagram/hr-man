@@ -226,7 +226,7 @@ class LeaveRequestsController < ApplicationController
   private
 
   def find_leave_request
-    @leave_request = LeaveRequest.find(params[:leave_request])
+    @leave_request = LeaveRequest.find(params[:leave_request_id])
   rescue ActiveRecord::RecordNotFound
     flash.now[:danger] = "Something went wrong, please check your input and try again."
   end

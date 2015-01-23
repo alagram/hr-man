@@ -1,5 +1,7 @@
 <%= ajax_flash("#content-div") %>
 
+$("#reject_leave_modal").modal('hide');
+
 <% if @leave_request %>
   $("#request_<%= @leave_request.id %>_tr").remove();
 <% end %>

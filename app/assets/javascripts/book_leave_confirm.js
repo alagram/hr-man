@@ -1,8 +1,8 @@
 $(document).ready(function(){
-  $(":button").click(function(){
+  $(".book_leave_btn").click(function(){
     var leave_id = $(this).val();
     $("#confirm_modal").modal('show');
-    $("#leave_approval_yes").click(function(){
+    $("#book_leave_yes").click(function(){
       $.ajax({
         url: '/book_leave',
         type: 'POST',
