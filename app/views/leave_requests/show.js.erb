@@ -1,7 +1,6 @@
 <%= ajax_flash("#content-div") %>
 
 <% if @leave_request %>
-  $("#leave_history_modal").modal('hide');
   $("#employee_name").html("<%= @leave_request.employee %>")
   $('#request_type').html("<%= @leave_request.leave_type.name %>");
   $('#day_type').html("<%= @leave_request.day_type.capitalize %>");
