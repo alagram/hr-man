@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   get 'calendar_view', to: 'leave_requests#calendar_view'
   post 'reject_leave', to: 'leave_requests#reject_leave'
 
-  resources :employees, except: :destroy do
+  namespace :admin do
+    root to: 'base#index'
+    resources :employees, except: [:delete]
+  end
+
+  resources :employees, only: :show do
     collection do
       get :search
     end

@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    redirect_to employees_path and return if super_user?
+    redirect_to admin_employees_path and return if super_user?
     redirect_to welcome_path if current_user
   end
 
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if employee && employee.authenticate(params[:password])
       session[:emp_id] = employee.id
       if super_user?
-        redirect_to employees_path
+        redirect_to admin_employees_path
         flash[:success] = "You have successfully signed in."
         return
       else

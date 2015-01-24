@@ -5,7 +5,7 @@
   .col-md-4
     .jumbotron
       .text-center
-        = link_to "New Employee", new_employee_path, class: 'btn btn-success'
+        = link_to "New Employee", new_admin_employee_path, class: 'btn btn-success'
 
 
 
@@ -26,10 +26,10 @@
           %td= employee.gender.name
           %td
             .text-center
-              = link_to edit_employee_path(employee), title: "Edit #{employee}", class: 'btn btn-primary btn-xs' do
+              = link_to edit_admin_employee_path(employee), title: "Edit #{employee}", class: 'btn btn-primary btn-xs' do
                 %i.glyphicon.glyphicon-edit
                 Edit
 
-= link_to "New Employee", new_employee_path, class: 'btn btn-primary'
+= link_to "New Employee", new_admin_employee_path, class: 'btn btn-primary'
 
 %hr

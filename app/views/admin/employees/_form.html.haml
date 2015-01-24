@@ -1,5 +1,5 @@
 %section.row
-= form_for @employee, html: { class: 'form-horizontal', autocomplete: 'off' } do |f|
+= form_for [:admin, @employee], html: { class: 'form-horizontal', autocomplete: 'off' } do |f|
   .form-group
     = f.label :first_name, class: 'col-sm-2 control-label'
     .col-sm-6
@@ -16,6 +16,10 @@
     = f.label :last_name, class: 'col-sm-2 control-label'
     .col-sm-6
       = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
+  .form-group
+    = f.label :admin, label: "Is an admin?", class: 'col-sm-2 control-label'
+    .col-sm-6
+      = f.check_box :admin
   .form-group
     = f.label :emp_id, "Staff Number", class: 'col-sm-2 control-label'
     .col-sm-6

@@ -15,7 +15,7 @@
             %span{:style => 'font-size: 13px'}= @employee.job_title.name
           - if current_user && super_user?
             %p.navbar-text.navbar-right
-              = link_to edit_admin_employee_path(@employee), title: "Edit #{@employee}", :style => 'color: white', class: 'navbar-link btn btn-primary btn-xs' do
+              = link_to edit_employee_path(@employee), title: "Edit #{@employee}", :style => 'color: white', class: 'navbar-link btn btn-primary btn-xs' do
                 %i.glyphicon.glyphicon-edit
                 Edit Profile
       %table.table{:style => 'background: white'}
