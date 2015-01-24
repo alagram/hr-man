@@ -1,0 +1,26 @@
+%table.table.table-bordered#calendar_view_table{:style => 'background: white;'}
+  %thead
+    %tr
+      %td Employees
+      %td{:colspan => "#{@date_range.count}", :align => "center"}= "#{@month.strftime("%B")}"
+    %tr
+      %td
+      - @date_range.each do |date|
+        %td= "#{date.strftime("%a")[0]}"
+    %tr
+      %td
+      - @date_range.each do |date|
+        %td= "#{date.strftime("%e")}"
+  %tbody
+    - if @leave_requests.empty?
+      %tr
+        %td{:colspan => "#{@date_range.count}", :align => "center"} Nothing found
+    - else
+      - @leave_requests.each do |leave_request|
+        %tr
+          %td{style: "width: 410px;"}= leave_request.employee.first_name
+          - @date_range.each do |date|
+            - if ((leave_request.date_from).to_date..(leave_request.date_to).to_date).include?(date)
+              %td{style: "background-color: red"}
+            - else
+              %td

@@ -52,11 +52,11 @@
             %th Compassionate Leave Days Left
             %td= pluralize("#{@leave_records.where(leave_type_id: 4).first.days_left}", 'day')
           %tr
-            - unless current_user.gender_id == 1
+            - if current_user.gender_id == 1
               %th Paternity Leave Days Left
               %td= pluralize("#{@leave_records.where(leave_type_id: 3).first.days_left}", 'day')
           %tr
-            - unless current_user.gender_id == 2
+            - if current_user.gender_id == 2
               %th Maternity Leave Days Left
               %td= pluralize("#{@leave_records.where(leave_type_id: 2).first.days_left}", 'day')
 - else

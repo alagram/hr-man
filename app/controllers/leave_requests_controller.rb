@@ -120,14 +120,14 @@ class LeaveRequestsController < ApplicationController
   def book_leave
     respond_to do |format|
       format.js do
-        @leave_request = LeaveRequest.where(id: params[:leave_request], employee: current_user).first
+        @leave_request = LeaveRequest.where(id: params[:leave_request_id], employee: current_user).first
         if @leave_request
           reliever_ids = @leave_request.relievers.reject(&:empty?)
           @relievers = Employee.where(id: reliever_ids).pluck(:email)
           @leave_request.leave_status_id = 3
           @leave_request.save
           AppMailer.send_leave_booking_email(@leave_request, @relievers).deliver
-          flash.now[:success] = "Your leave is going through the approval process."
+          flash.now[:success] = "Leave booked successfully."
         else
           flash.now[:danger] = "Something went wrong, please check your input and try again."
         end
@@ -207,10 +207,26 @@ class LeaveRequestsController < ApplicationController
     end
   end
 
+  def calendar_view
+    respond_to do |format|
+      format.html
+      format.js do
+        @date = Date.today
+        @month_selected = params[:month_selected]
+        @month = Date.parse("01-#{@month_selected}-#{Time.now.year}")
+        @month_start = @month.beginning_of_month
+        @month_end = @month.end_of_month
+        @date_range = Date.parse("#{Time.now.year}-#{@month_selected}-1").all_month
+        @leave_requests = LeaveRequest.where("date_to >= :month_start and date_from <= :month_end",
+                                             month_end: "#{@month_end}", month_start: "#{@month_start}")
+      end
+    end
+  end
+
   private
 
   def find_leave_request
-    @leave_request = LeaveRequest.find(params[:leave_request])
+    @leave_request = LeaveRequest.find(params[:leave_request_id])
   rescue ActiveRecord::RecordNotFound
     flash.now[:danger] = "Something went wrong, please check your input and try again."
   end

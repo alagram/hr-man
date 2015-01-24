@@ -44,6 +44,10 @@
                   = link_to team_leave_history_path do
                     %i.glyphicon.glyphicon-th-list
                     My Team's Leave History
+                %li
+                  = link_to calendar_view_path do
+                    %i.fa.fa-calendar
+                    Calendar View
                 - if current_user && super_user?
                   %li
                     = link_to pending_requests_path do

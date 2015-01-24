@@ -1,10 +1,12 @@
 - title "My Leave History"
-= render 'show_leave_details'
 
+= render 'leave_details_modal'
+= render 'book_leave_confirm_modal'
 .jumbotron
-  .form-group.col-lg-6
-    %h3 Leave History
-  %table.table.table-bordered.table-striped{:style => 'background: white'}
+  .row
+    .form-group.col-lg-6
+      %h3 Leave History
+  %table.table.table-bordered.table-striped#leave_history_table{:style => 'background: white'}
     %thead
       %tr
         %th #
@@ -24,11 +26,11 @@
           %td= leave_request.leave_type.name
           %td{id: "leave_request_#{leave_request.id}_status"}= leave_request.leave_status.try(:name)
           %td
-            = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}" do
+            = link_to leave_request_path(leave_request), remote: true, class: 'btn btn-primary btn-xs', id: "view_leave_request_#{leave_request.id}", data: {toggle: "modal", target: "#leave_request_#{leave_request.id}_modal"} do
               %i.glyphicon.glyphicon-info-sign
               View Details
             - if leave_request.leave_status_id == 1
-              = link_to book_leave_path(leave_request: leave_request.id), method: :post, remote: true, class: 'btn btn-success btn-xs', id: "leave_request_#{leave_request.id}" do
+              %button{class: "btn btn-success btn-xs book_leave_btn", value: "#{leave_request.id}", id: "book_leave_#{leave_request.id}"}
                 %i.glyphicon.glyphicon-ok
                 Book Leave
 

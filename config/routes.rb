@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   post 'book_leave', to: 'leave_requests#book_leave'
   get 'pending_requests', to: 'leave_requests#pending_requests'
   post 'approve_leave', to: 'leave_requests#approve_leave'
-  delete 'reject_leave', to: 'leave_requests#reject_leave'
+  get 'calendar_view', to: 'leave_requests#calendar_view'
+  post 'reject_leave', to: 'leave_requests#reject_leave'
 
   resources :employees, except: :destroy do
     collection do

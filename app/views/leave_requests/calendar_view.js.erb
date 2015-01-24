@@ -1,0 +1,4 @@
+$("#calendar_view_table").show();
+<% if @leave_requests %>
+  $("#calendar_view").html("<%= escape_javascript(render partial: 'calendar', locals: {leave_requests: @leave_requests}) %>");
+<% end %>
